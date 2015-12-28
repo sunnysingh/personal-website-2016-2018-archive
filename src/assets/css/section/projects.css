@@ -1,0 +1,94 @@
+/*
+|--------------------------------------------------------------------------
+| Section: Projects
+|--------------------------------------------------------------------------
+|
+| Page-specifc styles for projects section.
+|
+*/
+
+.projects {
+    lost-flex-container: row;
+
+    &-col {
+        lost-column: 1/2;
+    }
+
+    @media (--sm) {
+        &-col {
+            lost-column: 1/1;
+        }
+    }
+}
+
+.project {
+    lost-flex-container: row;
+
+    &-about,
+    &-stack {
+        lost-column: 1/2;
+    }
+
+    .is-single &-about {
+        lost-column: 1/1;
+    }
+
+    @media (--md) {
+        &-about,
+        &-stack {
+            lost-column: 1/1;
+        }
+    }
+}
+
+.project-preview {
+    position: relative;
+    text-align: center;
+
+    &-img {
+        margin-bottom: 15px;
+        border-radius: 4px;
+        filter: brightness(.65) grayscale(.5);
+        transition: filter .2s ease;
+    }
+
+    a:hover &-img {
+        filter: brightness(.8) grayscale(.3);
+    }
+
+    &-text {
+        position: absolute 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span {
+            padding: 15px 20px;
+            color: #fff;
+            font-size: 20px;
+            text-shadow: 1px 1px rgba(#000, .2);
+            background: rgba(#000, .2);
+        }
+    }
+}
+
+.project-tools {
+    padding-left: 0;
+    list-style: none;
+
+    li {
+        display: flex;
+        align-items: center;
+        padding: 5px 0;
+    }
+
+    &-icon {
+        display: flex;
+        align-items: center;
+        min-height: 32px;
+        padding-right: 10px;
+    }
+
+    &-desc {
+        margin-bottom: 0;
+    }
+}

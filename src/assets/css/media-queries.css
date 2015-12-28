@@ -1,0 +1,13 @@
+/*
+|--------------------------------------------------------------------------
+| Media Queries
+|--------------------------------------------------------------------------
+|
+| Define custom media queries here.
+|
+*/
+
+@custom-media --sm (width < 500px);
+@custom-media --md (width < 1100px);
+@custom-media --md-only (width >= 500px && width < 1100px);
+@custom-media --lg (width >= 1100px);

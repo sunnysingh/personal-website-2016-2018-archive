@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>
+        {{#if pageTitle}}
+            {{ pageTitle }}
+        {{else}}
+            {{ site.title }}
+        {{/if}}
+    </title>
+
+    {{#if description}}
+    	<meta name="description" content="{{ description }}" />
+    {{/if}}
+
+	{{> favicons}}
+
+	<style>{{{ sources.[assets/css/site.css] }}}</style>
+	<script src="/{{ fingerprint.[assets/js/site.js] }}" async></script>
+
+</head>
+
+<body class="section-{{ section }}" data-section="{{ section }}">
+
+	<!--[if lte IE 9]>
+    	<p style="padding: 30px 0; text-align: center; font-family: arial, sans-serif; font-size: 18px; font-weight: bold;">
+			You are using an <strong>outdated</strong> web browser. Please <a href="http://browsehappy.com/?locale=en" target="_blank">upgrade your browser</a> to improve your experience.
+		</p>
+    <![endif]-->
+
+	{{> icons_svg}}
+
+	<header class="site-header" role="banner">
+
+		<nav class="nav" role="navigation">
+			<ul>
+				{{#each site.sections}}
+				<li class="nav-item is-{{ item }}">
+					<a class="has-tooltip has-tooltip-bottom" href="{{ url }}" aria-label="{{ label }}">
+						{{> icon name=item }}
+						<span class="sr-only">{{ label }}</span>
+					</a>
+				</li>
+				{{/each}}
+				<li class="nav-item is-search">
+					<a href="/search">
+						{{> icon name="search" }}
+					</a>
+				</li>
+			</ul>
+		</nav>
+
+		<div class="logo">
+			<a href="/">
+				<img
+					src="/{{ fingerprint.[assets/svg/logov2.svg] }}"
+					alt="Sunny Singh logo"
+					width="230"
+					height="26"
+				/>
+			</a>
+		</div>
+
+		<div class="search">
+			<form role="search">
+				<noscript>Sorry, you need to enable JavaScript to search this site.</noscript>
+				<input id="search" class="input" type="search" placeholder="Search..." />
+				<button class="hidden" type="submit">Search</button>
+			</form>
+		</div>
+
+	</header>
+
+	<div class="site-cover">
+
+		<div class="site-cover-video">
+			<video id="video" role="presentation" poster="/{{ fingerprint.[assets/images/cover.jpg] }}" autoplay loop>
+				<source src="/{{ fingerprint.[assets/videos/cover.mp4] }}" type="video/mp4" />
+				<source src="/{{ fingerprint.[assets/videos/cover.webm] }}" type="video/webm" />
+				<source src="/{{ fingerprint.[assets/videos/cover.ogv] }}" type="video/ogg">
+			</video>
+		</div>
+
+		<div class="site-cover-content" id="cover" aria-live="assertive">
+
+			{{#eq section "home" }}
+			    <img
+					class="site-cover-content-image"
+					src="/{{ fingerprint.[assets/images/avatar.png] }}"
+					alt="A picture of me"
+					width="150"
+					height="150"
+			    />
+
+			    <div class="site-cover-content-text">
+			        <p>
+			            Hello! I am a web developer<span class="slash">/</span>designer.<br />
+			            Co-founder and lead developer at <a href="https://ninjality.com/">Ninjality</a>.
+			        </p>
+			    </div>
+			{{else}}
+				<h1 class="site-cover-content-heading">{{ title }}</h1>
+				<p class="site-cover-content-lead">{{ description }}</p>
+			{{/eq}}
+
+		</div>
+
+	</div>
+
+	<main class="site-content" id="content" role="main" aria-live="assertive">
+		{{{ contents }}}
+	</main>
+
+	<footer class="site-footer" role="contentinfo">
+
+		<ul class="social">
+			{{#each site.social}}
+			<li>
+				<a
+					class="has-tooltip has-tooltip-top"
+					href="{{ url }}"
+					aria-label="{{ desc }}"
+				>
+					{{> icon name=item }}
+					<span class="sr-only">{{ label }}</span>
+				</a>
+			</li>
+			{{/each}}
+		</ul>
+
+		<p class="copyright">
+			sunnysingh.io © {{ site.year }}
+		</p>
+
+	</footer>
+
+</body>
+</html>

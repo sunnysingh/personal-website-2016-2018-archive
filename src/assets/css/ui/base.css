@@ -1,0 +1,107 @@
+
+/*
+|--------------------------------------------------------------------------
+| Base
+|--------------------------------------------------------------------------
+|
+| Normalize browser rendering and define base styles.
+|
+*/
+
+@import 'normalize.css';
+
+/**
+ * Box Model Reset
+ *
+ * https://sunnysingh.io/blog/box-model-reset
+ */
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+/**
+ * Enable responsive design in IE 10 Snap Mode
+ *
+ * http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/
+ */
+
+@viewport {
+    width: device-width;
+}
+
+/**
+ * Body Color
+ */
+
+body {
+    color: var(--body-color);
+    background: var(--body-bg);
+}
+
+/**
+ * Text Selection Color
+ */
+
+::selection {
+    color: #fff;
+    background: var(--brand-primary);
+}
+
+/**
+ * Links
+ */
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all .2s ease;
+
+    &:--enter {
+        color: var(--link-enter-color);
+        text-decoration: none;
+        border-color: var(--link-enter-color);
+    }
+}
+
+/**
+ * Images
+ */
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+/**
+ * Inputs
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/**
+ * Keyboard
+ */
+
+kbd {
+    display: inline-block;
+    margin: 0 .1em;
+    padding: .1em .6em;
+    font-family: var(--font-sans-serif);
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #f7f7f7;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+    text-shadow: 0 1px 0 #fff;
+    white-space: nowrap;
+}

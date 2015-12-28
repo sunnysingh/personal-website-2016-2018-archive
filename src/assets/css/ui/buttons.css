@@ -1,0 +1,37 @@
+/*
+|--------------------------------------------------------------------------
+| Buttons
+|--------------------------------------------------------------------------
+|
+| Button styles.
+|
+*/
+
+.btn,
+a.btn,
+button.btn {
+    display: inline-block;
+    padding: 4px 6px;
+    border: 1px solid;
+    border-radius: 2px;
+    border-color: var(--gray-light);
+    color: var(--gray-light);
+    font-size: 1.2em;
+    font-family: var(--font-sans-serif);
+    background: none;
+    transition: all .2s ease;
+    -moz-osx-font-smoothing: grayscale;
+     -webkit-font-smoothing: antialiased;
+
+    &.is-lg {
+        padding: 6px 8px;
+        border-radius: 4px;
+        font-size: 1.5em;
+    }
+
+    &:--enter {
+        color: #fff;
+        border-color: var(--brand-primary);
+        background: var(--brand-primary);
+    }
+}

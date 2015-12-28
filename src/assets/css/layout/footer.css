@@ -1,0 +1,61 @@
+
+/*
+|--------------------------------------------------------------------------
+| Layout: Footer
+|--------------------------------------------------------------------------
+|
+| The main footer area for the layout.
+|
+*/
+
+.site-footer {
+    padding-top: 1rem;
+    text-align: center;
+
+    .social {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+        padding-left: 0;
+        list-style: none;
+
+        li {
+            display: inline-block;
+            padding-left: 2px;
+            cursor: default; /* Don't show text cursor between items */
+
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 1px;
+                height: 25px;
+                background: #ccc;
+            }
+
+            &:first-child {
+                padding-left: 0;
+
+                &::before {
+                    display: none;
+                }
+            }
+
+        }
+
+        a {
+            display: inline-block;
+            padding: 5px;
+        }
+
+        svg {
+            font-size: 25px;
+        }
+    }
+
+    .copyright {
+        color: #b0b0b0;
+        font-size: .9rem;
+        cursor: default;
+    }
+
+}

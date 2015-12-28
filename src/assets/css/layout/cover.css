@@ -1,0 +1,122 @@
+
+/*
+|--------------------------------------------------------------------------
+| Layout: Cover
+|--------------------------------------------------------------------------
+|
+| The large cover below the header.
+|
+*/
+
+.site-cover {
+    $height: 160px;
+    $height-lg: 240px;
+
+    @media (--sm) {
+        $height-lg: 300px;
+    }
+
+    height: $height;
+    position: relative;
+    background: #222 resolve('images/cover.jpg') 50% 50%;
+    background-size: cover;
+
+    .section-home & {
+        height: $height-lg;
+    }
+
+    &-video {
+        display: none;
+        position: absolute 0 0;
+        z-index: 0;
+        size: 100% $height-lg;
+        overflow: hidden;
+
+        .section-home & {
+            display: block;
+        }
+
+        video {
+            position: absolute 0 0;
+            z-index: 0;
+            size: 100% 100%;
+            object-fit: cover;
+        }
+    }
+
+    &-content {
+        position: absolute 0 0;
+        z-index: 1;
+        size: 100% $height;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: height .25s ease;
+
+        .section-home & {
+            height: $height-lg;
+            flex-direction: row;
+        }
+
+        @media (--sm) {
+            .section-home & {
+                flex-direction: column;
+            }
+        }
+
+        &-heading {
+            margin-top: 0;
+            color: #fff;
+            font-size: 2.5rem;
+        }
+
+        &-lead {
+            color: #fff;
+        }
+
+        &-image {
+            size: 150px 150px;
+            border: 8px solid rgba(0, 0, 0, .05);
+            border-radius: 50%;
+            transition: filter .4s ease;
+
+            &:hover {
+                /* Source: http://simurai.com/filter.css/ */
+                filter: brightness(1.3) contrast(0.8) grayscale(0.9) hue-rotate(0deg) invert(0) saturate(1) sepia(0);
+            }
+        }
+
+        &-text {
+            display: flex;
+            align-items: center;
+            padding-left: 2.5rem;
+            height: 140px;
+            color: #fff;
+            font-size: 1.1rem;
+            line-height: 2rem;
+        }
+
+        @media (--sm) {
+            &-text {
+                padding-left: .5rem;
+                padding-right: .5rem;
+                text-align: center;
+            }
+
+            &-image {
+                margin-top: 1.5rem;
+            }
+        }
+
+        a {
+            color: #fff;
+            border-color: #fff;
+
+            &:--enter {
+                color: #fff;
+                border-color: transparent;
+            }
+        }
+    }
+}

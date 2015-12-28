@@ -1,0 +1,16 @@
+
+/*
+|--------------------------------------------------------------------------
+| Custom Selectors
+|--------------------------------------------------------------------------
+|
+| Define custom selectors here.
+|
+*/
+
+/**
+ * Combine :hover and :focus into a single selector.
+ *
+ * http://discourse.wicg.io/t/a-common-pseudo-class-for-hover-and-focus/877
+ */
+@custom-selector :--enter :hover, :focus;

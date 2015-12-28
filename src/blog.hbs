@@ -1,0 +1,26 @@
+---
+section: blog
+layout: layout.hbs
+title: Articles
+description: Learn something new.
+---
+
+{{#each collections.articles}}
+
+    <article>
+
+        <h2 class="article-heading">
+            <a href="{{ this.url }}">
+                {{ this.title }}
+            </a>
+        </h2>
+
+        <p class="metadata">Published on Monday in Coding.</p>
+
+        <section>
+            <p>{{ this.description }}</p>
+        </section>
+
+    </article>
+
+{{/each}}

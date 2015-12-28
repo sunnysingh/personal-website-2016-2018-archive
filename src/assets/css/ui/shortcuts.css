@@ -1,0 +1,18 @@
+.shortcuts {
+    list-style: none;
+
+    li {
+        height: 35px;
+        padding: 5px;
+        border-bottom: 1px solid var(--gray-lighter);
+        clear: both;
+    }
+
+    &-key {
+        float: left;
+    }
+
+    &-desc {
+        float: right;
+    }
+}

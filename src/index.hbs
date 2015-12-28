@@ -1,0 +1,83 @@
+---
+section: home
+layout: layout.hbs
+description: A web developer/designer and the co-founder of Ninjality and CodeBee.
+---
+
+<div class="home-featured">
+
+    <div class="home-articles" aria-labelledby="articles">
+
+        <h2 class="home-featured-heading" id="articles">Articles</h2>
+
+        <article>
+
+            <h2 class="article-heading">
+                <a href="">How to create a static site</a>
+            </h2>
+
+            <p class="metadata">Published on Monday in Coding.</p>
+
+            <section>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo inventore adipisci architecto sequi quae quasi, vel magnam exercitationem officiis laboriosam id ipsum?</p>
+            </section>
+
+        </article>
+
+        <article>
+
+            <h2 class="article-heading">
+                <a href="">How to create a Laravel app</a>
+            </h2>
+
+            <p class="metadata">Published on Tuesday in Coding.</p>
+
+            <section>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo inventore adipisci architecto sequi quae quasi, vel magnam exercitationem officiis laboriosam id ipsum?</p>
+            </section>
+
+        </article>
+
+        <div class="home-articles-footer">
+            <a class="btn" href="/blog">All Articles</a>
+        </div>
+
+    </div>
+
+    <div class="home-projects" aria-labelledby="projects">
+
+        <h2 class="home-featured-heading" id="projects">Projects</h2>
+
+        <a class="media-project is-codebee" href="/projects/codebee">
+            <div class="media-project-icon" role="presentation">
+                {{> icon name="codebee" }}
+            </div>
+            <div class="media-project-text">
+                <h3>CodeBee</h3>
+                <p>
+                    Connect with other<br />
+                    developers and designers.
+                </p>
+            </div>
+        </a>
+
+        <a class="media-project is-socialshares" href="/projects/socialshares">
+            <div class="media-project-icon" role="presentation">
+                {{> icon name="socialshares" }}
+            </div>
+            <div class="media-project-text">
+                <h3>socialshares</h3>
+                <p>
+                    Lightweight share buttons<br />
+                    for the web.
+                </p>
+            </div>
+        </a>
+
+        <div class="home-projects-footer">
+            <a class="btn" href="/projects">All Projects</a>
+        </div>
+
+    </div>
+
+</div>
