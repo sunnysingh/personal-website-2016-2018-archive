@@ -26,23 +26,6 @@
         }
     }
 
-    .article-heading {
-        font-size: 1.6rem;
-
-        a {
-            color: var(--brand-primary);
-        }
-    }
-
-    .metadata {
-        color: var(--gray-light);
-        font-size: 1rem;
-    }
-
-    section {
-        font-size: 1.1rem;
-    }
-
     &-footer {
         margin-top: 15px;
     }
@@ -55,58 +38,6 @@
         & {
             lost-column: 1/1;
             padding-bottom: 2rem;
-        }
-    }
-
-    &-project {
-        lost-flex-container: row;
-        width: 100%;
-        height: 110px;
-        border: none;
-
-        &-icon {
-            lost-column: 1/3;
-            lost-move: 2/3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-
-            .is-codebee & {
-                background: #e94d3b;
-            }
-
-            .is-socialshares & {
-                background: #f4f4f4;
-            }
-
-            svg {
-                width: 80px;
-                height: 80px;
-            }
-        }
-
-        &-desc {
-            lost-column: 2/3;
-            lost-move: -1/3;
-            padding: 15px;
-            padding-left: 0;
-            font-size: .9rem;
-            color: var(--body-color);
-            background: var(--body-bg);
-            transition: padding .2s ease;
-
-            .is-codebee & h3 {
-                color: #e94d3b;
-            }
-
-            .is-socialshares & h3 {
-                color: #aa2582;
-            }
-        }
-
-        &:--enter &-desc {
-            padding-left: 15px;
         }
     }
 

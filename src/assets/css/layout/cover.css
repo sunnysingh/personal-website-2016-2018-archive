@@ -9,7 +9,7 @@
 */
 
 .site-cover {
-    $height: 160px;
+    $height: auto;
     $height-lg: 240px;
 
     @media (--sm) {
@@ -31,6 +31,7 @@
         z-index: 0;
         size: 100% $height-lg;
         overflow: hidden;
+        background: transparent;
 
         .section-home & {
             display: block;
@@ -45,18 +46,21 @@
     }
 
     &-content {
-        position: absolute 0 0;
+        position: relative;
         z-index: 1;
         size: 100% $height;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        padding: 30px;
         transition: height .25s ease;
 
         .section-home & {
+            position: absolute;
             height: $height-lg;
             flex-direction: row;
+            padding: 0;
         }
 
         @media (--sm) {

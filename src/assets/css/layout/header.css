@@ -20,8 +20,12 @@
 
         a {
             display: inline-block;
-            width: 230px;
             border-bottom: none;
+        }
+
+        svg {
+            width: 230px;
+            height: auto;
         }
     }
 

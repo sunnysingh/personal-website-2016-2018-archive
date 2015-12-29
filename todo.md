@@ -1,0 +1,3 @@
+- Convert articles
+    - pandoc article.html -o article-converted.html -t html5
+    - pandoc article-converted.html -o article.md -t markdown_github

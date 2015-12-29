@@ -10,33 +10,11 @@ description: A web developer/designer and the co-founder of Ninjality and CodeBe
 
         <h2 class="home-featured-heading" id="articles">Articles</h2>
 
-        <article>
+        {{#each collections.newArticles}}
 
-            <h2 class="article-heading">
-                <a href="">How to create a static site</a>
-            </h2>
+            {{> article-item }}
 
-            <p class="metadata">Published on Monday in Coding.</p>
-
-            <section>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo inventore adipisci architecto sequi quae quasi, vel magnam exercitationem officiis laboriosam id ipsum?</p>
-            </section>
-
-        </article>
-
-        <article>
-
-            <h2 class="article-heading">
-                <a href="">How to create a Laravel app</a>
-            </h2>
-
-            <p class="metadata">Published on Tuesday in Coding.</p>
-
-            <section>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo inventore adipisci architecto sequi quae quasi, vel magnam exercitationem officiis laboriosam id ipsum?</p>
-            </section>
-
-        </article>
+        {{/each}}
 
         <div class="home-articles-footer">
             <a class="btn" href="/blog">All Articles</a>

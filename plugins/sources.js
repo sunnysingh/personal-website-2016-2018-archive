@@ -13,7 +13,16 @@ module.exports = function (options) {
                 return multimatch(p, options.pattern).length > 0
             })
             .forEach(function (p) {
-                metadata.sources[p] = files[p].contents;
+
+                // Get file content
+                var content = files[p].contents.toString();
+
+                // If it's an SVG file, the <?xml> can be stripped out
+                content = content.replace(/\<\?xml.+\?\>/g, '');
+
+                // Store in metadata
+                metadata.sources[p] = content;
+
             });
 
         return process.nextTick(done);

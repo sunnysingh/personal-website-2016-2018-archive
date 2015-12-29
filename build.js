@@ -17,6 +17,7 @@ const collections = require('metalsmith-collections');
 const define      = require('metalsmith-define');
 const drafts      = require('metalsmith-drafts');
 const markdown    = require('metalsmith-markdown');
+const metallic    = require('metalsmith-metallic');
 const pagetitles  = require('metalsmith-page-titles');
 const date        = require('metalsmith-build-date');
 const layouts     = require('metalsmith-layouts');
@@ -28,10 +29,11 @@ const fingerprint = require('metalsmith-fingerprint');
 const rename      = require('metalsmith-rename');
 const htmlMin     = require('metalsmith-html-minifier');
 const gzip        = require('metalsmith-gzip');
-const url         = require('./plugins/url');
+const appendMeta  = require('./plugins/append-meta');
 const sources     = require('./plugins/sources');
 const Handlebars  = require('handlebars');
 const bs          = require('browser-sync').create();
+const moment      = require('moment');
 const fs          = require('fs');
 const argv        = require('yargs').argv;
 
@@ -42,6 +44,17 @@ let config = {
     watch:      argv.watch,
     sourcemaps: argv.sourcemaps ? true : argv.watch,
 };
+
+// Uncomment when testing performance
+// config.env = 'prod';
+// config.sourcemaps = false;
+
+// Metadata is passed into templates and webpack
+
+let metadata = JSON.parse(fs.readFileSync('metadata.json', 'utf8'));
+
+metadata.site.env = config.env;
+metadata.services.disqus.shortname = metadata.services.disqus['shortname_'+config.env];
 
 // PostCSS Plugins
 
@@ -69,7 +82,12 @@ let postcssPlugins = [
 
 // Webpack Plugins
 
-let webpackPlugins = [new webpackCore.optimize.UglifyJsPlugin()];
+let webpackPlugins = [
+    new webpackCore.optimize.UglifyJsPlugin(),
+    new webpackCore.DefinePlugin({
+        metadata: JSON.stringify(metadata),
+    }),
+];
 
 // Handlebars Helpers
 
@@ -83,6 +101,15 @@ Handlebars.registerHelper('ne', function (a, b) {
     return (a !== b) ? next.fn(this) : next.inverse(this);
 });
 
+Handlebars.registerHelper('timeago', (context, block) => {
+    return moment(context).fromNow();
+});
+
+Handlebars.registerHelper('date', (context, block) => {
+    let format = block.hash.format || "MMMM Do, YYYY [at] hh:mmA";
+    return moment(context).format(format);
+});
+
 // Metalsmith Pipeline
 
 let build = callback => {
@@ -90,7 +117,7 @@ let build = callback => {
     Metalsmith(__dirname)
 
         // Metadata
-        .metadata(JSON.parse(fs.readFileSync('metadata.json', 'utf8')))
+        .metadata(metadata)
 
         // PostCSS
         .use(postcss(
@@ -140,7 +167,7 @@ let build = callback => {
         .use(sources({
             pattern: [
                 'assets/css/site.css',
-                'assets/js/site.js',
+                'assets/svg/logo.svg',
             ]
         }))
 
@@ -156,7 +183,7 @@ let build = callback => {
 
         // Page Titles
         .use(pagetitles({
-            separator: ' | ',
+            separator: ' - ',
         }))
 
         // Build Date
@@ -168,13 +195,21 @@ let build = callback => {
                 pattern: 'blog/**/*.md',
                 sortBy: 'date',
                 reverse: true,
+            },
+            newArticles: {
+                pattern: 'blog/**/*.md',
+                sortBy: 'date',
+                reverse: true,
+                limit: 2,
             }
         }))
 
-        // Add URL metadata to files
-        .use(url([
-            [/\.md$/, ""],
-        ]))
+        // Append metadata to articles
+        .use(appendMeta({
+            pattern: 'blog/**/*.md',
+            urlPattern: /\.md$/,
+            data: [{section: 'blog'}],
+        }))
 
         // Handlebars
         .use(branch('**/*.hbs')
@@ -182,7 +217,6 @@ let build = callback => {
                 engine:    'handlebars',
                 partials:  'partials',
                 directory: 'layouts',
-                default:   'layout.hbs',
             }))
             .use(inPlace({
                 engine:   'handlebars',
@@ -193,12 +227,13 @@ let build = callback => {
         // Articles
         .use(branch('blog/**/*.md')
             .use(drafts())
+            .use(metallic())
             .use(markdown())
             .use(layouts({
                 engine:    'handlebars',
                 partials:  'partials',
                 directory: 'layouts',
-                default:   'layout.hbs',
+                default:   'article.hbs',
             }))
             .use(inPlace({
                 engine:   'handlebars',

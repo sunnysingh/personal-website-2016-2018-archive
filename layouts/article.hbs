@@ -1,0 +1,55 @@
+{{#> layout }}
+
+	<article class="article">
+
+		<p class="article-metadata">
+			<span class="article-metadata-group">
+				{{> icon name="tags" }}
+				{{#if this.topics}}
+					{{ this.topics }}
+				{{else}}
+					No Topics
+				{{/if}}
+			</span>
+			<span
+				class="article-metadata-group has-tooltip has-tooltip-top"
+				aria-label="{{date this.date }}"
+			>
+				{{> icon name="time" }}
+				{{#if this.topics}}
+					<time datetime="{{ this.date }}">
+						{{timeago this.date }}
+					</time>
+				{{else}}
+					No Date
+				{{/if}}
+			</span>
+		</p>
+
+		<div class="article-content">
+			{{{ contents }}}
+		</div>
+
+	</article>
+
+	<div
+		class="comments"
+		id="comments"
+		data-disqus-title="{{ this.title }}"
+		data-disqus-url="{{ site.base_url }}{{ this.url }}"
+		data-disqus-identifier="{{ this.disqus.identifier }}"
+	>
+
+		<noscript>JavaScript must be enabled to view or submit comments.</noscript>
+
+		<button class="btn" data-comments-btn>
+			{{> icon name="comments" }}
+			Show Comments
+		</button>
+
+		<!-- The disqus_thread div is where Disqus loads the comments -->
+		<div id="disqus_thread"></div>
+
+	</div>
+
+{{/layout}}

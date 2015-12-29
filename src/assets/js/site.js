@@ -13,3 +13,4 @@ import './shortcuts';
 
 // Sections
 import './sections/contact';
+import './sections/blog';

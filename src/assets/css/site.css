@@ -18,6 +18,7 @@
 @import 'ui/base';
 @import 'ui/grid';
 @import 'ui/type';
+@import 'ui/highlight';
 @import 'ui/icons';
 @import 'ui/buttons';
 @import 'ui/inputs';
@@ -27,6 +28,7 @@
 @import 'ui/alerts';
 @import 'ui/shortcuts';
 @import 'ui/media-project';
+@import 'ui/media-article';
 
 /* Layout */
 @import 'layout/header';
@@ -37,3 +39,4 @@
 /* Sections */
 @import 'section/home';
 @import 'section/projects';
+@import 'section/blog';
