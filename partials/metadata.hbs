@@ -1,0 +1,34 @@
+<script type="application/ld+json">
+{
+	"@context" : "http://schema.org",
+	"@type" : "WebSite",
+	"name" : "{{ site.name }}",
+	"alternateName" : "SunnySinghIO",
+	"url" : "{{ site.base_url }}",
+	"sameAs" : [
+		"https://twitter.com/SunnySinghIO",
+		"https://www.linkedin.com/in/sunnyisme"
+	]
+}
+</script>
+
+<meta name="twitter:card" content="summary" />
+{{#eq subsection "article"}}
+	<meta property="og:type" content="article" />
+{{/eq}}
+
+<meta name="twitter:site" content="@sunnysinghio" />
+<meta name="twitter:creator" content="@sunnysinghio" />
+
+<meta property="og:site_name" content="{{ site.title }}" />
+
+<meta name="twitter:description" content="{{ description }}" />
+<meta property="og:description" content="{{ description }}" />
+
+{{#if title}}
+	<meta name="twitter:title" content="{{ title }}" />
+	<meta property="og:title" content="{{ title }}" />
+{{else}}
+	<meta name="twitter:title" content="{{ site.title }}" />
+	<meta property="og:title" content="{{ site.title }}" />
+{{/if}}

@@ -7,7 +7,10 @@
 			</a>
 		</h2>
 		<p class="media-article-metadata">
-			<span class="media-article-metadata-group">
+			<span
+				class="article-metadata-group has-tooltip has-tooltip-top"
+				aria-label="Topics"
+			>
 				{{> icon name="tags" }}
 				{{#if this.topics}}
 					{{ this.topics }}
@@ -16,7 +19,7 @@
 				{{/if}}
 			</span>
 			<span
-				class="media-article-metadata-group has-tooltip has-tooltip-top"
+				class="article-metadata-group has-tooltip has-tooltip-top"
 				aria-label="{{date this.date }}"
 			>
 				{{> icon name="time" }}

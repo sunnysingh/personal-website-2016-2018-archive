@@ -61,7 +61,7 @@ domready(() => {
             text: text,
             html: true,
             allowOutsideClick: true,
-        })
+        });
     });
 
     keyboard.bind('/', event => {

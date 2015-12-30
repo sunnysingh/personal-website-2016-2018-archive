@@ -1,5 +1,5 @@
 ---
-topics: Coding, Security
+topics: Coding, Security, PHP
 title: Secure Passwords with Phpass
 description: A tutorial on implementing secure passwords with the Phpass password hashing library.
 date: 2011-10-11 12:55

@@ -46,12 +46,16 @@ domready(() => {
         // Get current section
         let section = bodyElement.getAttribute('data-section');
 
+        // Get current subsection
+        let subsection = bodyElement.getAttribute('data-subsection');
+
         // Get current page data to allow resetting state
         let initialPageData = {
-            title:   document.title,
-            cover:   coverElement.innerHTML,
-            content: contentElement.innerHTML,
-            section: section,
+            title:      document.title,
+            cover:      coverElement.innerHTML,
+            content:    contentElement.innerHTML,
+            section:    section,
+            subsection: subsection,
         };
 
         // Only play video on home section
@@ -68,9 +72,12 @@ domready(() => {
 
             document.title = data.title;
 
-            bodyElement.classList.remove('section-'+section)
+            bodyElement.classList.remove('section-'+section);
+            bodyElement.classList.remove('subsection-'+subsection);
             bodyElement.classList.add('section-'+data.section);
+            bodyElement.classList.add('subsection-'+data.subsection);
             bodyElement.setAttribute('data-section', data.section);
+            bodyElement.setAttribute('data-subsection', data.subsection);
 
             updateVideoState(data.section);
 
@@ -106,13 +113,15 @@ domready(() => {
                 let responseCover   = responseHtml.querySelector('#cover').innerHTML;
                 let responseContent = responseHtml.querySelector('#content').innerHTML;
                 let responseSection = responseHtml.querySelector('body').getAttribute('data-section');
+                let responseSubsection = responseHtml.querySelector('body').getAttribute('data-subsection');
 
                 // Update the page
                 updatePage({
-                    title:   responseTitle,
-                    cover:   responseCover,
-                    content: responseContent,
-                    section: responseSection,
+                    title:      responseTitle,
+                    cover:      responseCover,
+                    content:    responseContent,
+                    section:    responseSection,
+                    subsection: responseSubsection,
                 });
 
                 // Update history

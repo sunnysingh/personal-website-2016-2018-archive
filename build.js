@@ -14,8 +14,9 @@ const Metalsmith  = require('metalsmith');
 const condition   = require('metalsmith-if');
 const branch      = require('metalsmith-branch');
 const collections = require('metalsmith-collections');
+const rss         = require('metalsmith-feed');
 const define      = require('metalsmith-define');
-const drafts      = require('metalsmith-drafts');
+const ignore      = require('metalsmith-ignore');
 const markdown    = require('metalsmith-markdown');
 const metallic    = require('metalsmith-metallic');
 const pagetitles  = require('metalsmith-page-titles');
@@ -27,12 +28,14 @@ const webpack     = require('metalsmith-webpack');
 const webpackCore = require('webpack');
 const fingerprint = require('metalsmith-fingerprint');
 const rename      = require('metalsmith-rename');
+const imagemin    = require('metalsmith-imagemin');
 const htmlMin     = require('metalsmith-html-minifier');
 const gzip        = require('metalsmith-gzip');
 const appendMeta  = require('./plugins/append-meta');
 const sources     = require('./plugins/sources');
 const Handlebars  = require('handlebars');
 const bs          = require('browser-sync').create();
+const notifier    = require('node-notifier');
 const moment      = require('moment');
 const fs          = require('fs');
 const argv        = require('yargs').argv;
@@ -189,6 +192,9 @@ let build = callback => {
         // Build Date
         .use(date())
 
+        // Ignore Drafts
+        .use(ignore('blog/drafts/*'))
+
         // Collections
         .use(collections({
             articles: {
@@ -204,11 +210,24 @@ let build = callback => {
             }
         }))
 
+        // RSS
+        .use(rss({
+            feedOptions: {
+                title: metadata.site.title,
+                site_url: metadata.site.base_url,
+            },
+            collection: 'articles',
+            destination: 'articles.rss.xml',
+        }))
+
         // Append metadata to articles
         .use(appendMeta({
             pattern: 'blog/**/*.md',
             urlPattern: /\.md$/,
-            data: [{section: 'blog'}],
+            data: [
+                {section: 'blog'},
+                {subsection: 'article'},
+            ],
         }))
 
         // Handlebars
@@ -217,6 +236,7 @@ let build = callback => {
                 engine:    'handlebars',
                 partials:  'partials',
                 directory: 'layouts',
+                default:   'default.hbs',
             }))
             .use(inPlace({
                 engine:   'handlebars',
@@ -226,7 +246,6 @@ let build = callback => {
 
         // Articles
         .use(branch('blog/**/*.md')
-            .use(drafts())
             .use(metallic())
             .use(markdown())
             .use(layouts({
@@ -245,6 +264,9 @@ let build = callback => {
             [/\.hbs$/, '.html'],
         ]))
 
+        // Optimize Images
+        .use(condition(config.env == 'prod', imagemin()))
+
         // Minify HTML
         .use(condition(config.env == 'prod', htmlMin()))
 
@@ -255,6 +277,10 @@ let build = callback => {
         .build(error => {
             if (error) throw error;
             if (callback) callback(error);
+            notifier.notify({
+                'title':   'Metalsmith',
+                'message': 'Build script finished!'
+            });
         });
 };
 

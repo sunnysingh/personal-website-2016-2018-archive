@@ -9,10 +9,48 @@
 |
 */
 
+/* Hack font */
+
+@font-face {
+    font-family: 'Hack';
+    src: url('/assets/fonts/eot/latin/hack-regular-latin-webfont.eot?v=2.018');
+    src: url('/assets/fonts/eot/latin/hack-regular-latin-webfont.eot?#iefix&v=2.018') format('embedded-opentype'), url('/assets/fonts/woff2/latin/hack-regular-latin-webfont.woff2?v=2.018') format('woff2'), url('/assets/fonts/woff/latin/hack-regular-latin-webfont.woff?v=2.018') format('woff'), url('/assets/fonts/web-ttf/latin/hack-regular-latin-webfont.ttf?v=2.018') format('truetype'), url('/assets/fonts/svg/latin/hack-regular-latin-webfont.svg?v=2.018#hackregular') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Hack';
+    src: url('/assets/fonts/eot/latin/hack-bold-latin-webfont.eot?v=2.018');
+    src: url('/assets/fonts/eot/latin/hack-bold-latin-webfont.eot?#iefix&v=2.018') format('embedded-opentype'), url('/assets/fonts/woff2/latin/hack-bold-latin-webfont.woff2?v=2.018') format('woff2'), url('/assets/fonts/woff/latin/hack-bold-latin-webfont.woff?v=2.018') format('woff'), url('/assets/fonts/web-ttf/latin/hack-bold-latin-webfont.ttf?v=2.018') format('truetype'), url('/assets/fonts/svg/latin/hack-bold-latin-webfont.svg?v=2.018#hackbold') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Hack';
+    src: url('/assets/fonts/eot/latin/hack-italic-latin-webfont.eot?v=2.018');
+    src: url('/assets/fonts/eot/latin/hack-italic-latin-webfont.eot?#iefix&v=2.018') format('embedded-opentype'), url('/assets/fonts/woff2/latin/hack-italic-latin-webfont.woff2?v=2.018') format('woff2'), url('/assets/fonts/woff/latin/hack-italic-latin-webfont.woff?v=2.018') format('woff'), url('/assets/fonts/web-ttf/latin/hack-italic-latin-webfont.ttf?v=2.018') format('truetype'), url('/assets/fonts/svg/latin/hack-italic-latin-webfont.svg?v=2.018#hackitalic') format('svg');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Hack';
+    src: url('/assets/fonts/eot/latin/hack-bolditalic-latin-webfont.eot?v=2.018');
+    src: url('/assets/fonts/eot/latin/hack-bolditalic-latin-webfont.eot?#iefix&v=2.018') format('embedded-opentype'), url('/assets/fonts/woff2/latin/hack-bolditalic-latin-webfont.woff2?v=2.018') format('woff2'), url('/assets/fonts/woff/latin/hack-bolditalic-latin-webfont.woff?v=2.018') format('woff'), url('/assets/fonts/web-ttf/latin/hack-bolditalic-latin-webfont.ttf?v=2.018') format('truetype'), url('/assets/fonts/svg/latin/hack-bolditalic-latin-webfont.svg?v=2.018#hackbolditalic') format('svg');
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* Base */
+
 :root {
     font-family: var(--font-serif);
     font-size: 16px;
 }
+
+/* Headings */
 
 h1, h2, h3, h4, h5, h6 {
    margin-top: 0;
@@ -32,6 +70,8 @@ h2.readable {
     border-bottom: 1px solid var(--gray-lighter);
 }
 
+/* Paragraphs */
+
 p {
    margin-top: 0;
    margin-bottom: 1rem;
@@ -44,17 +84,25 @@ p {
    }
 }
 
-address {
-   margin-bottom: 1rem;
-   font-style: normal;
-   line-height: inherit;
-}
+/* Lists */
 
 ol,
 ul,
 dl {
    margin-top: 0;
    margin-bottom: 1rem;
+
+   .readable &,
+   &.readable {
+       font-size: 1.2rem;
+       line-height: 1.7rem;
+       letter-spacing: .004rem;
+   }
+
+   .readable & li:not(:last-child),
+   li.readable:not(:last-child) {
+       margin-bottom: .5rem;
+   }
 }
 
 ol ol,
@@ -73,9 +121,7 @@ dd {
    margin-left: 0;
 }
 
-blockquote {
-   margin: 0 0 1rem;
-}
+/* Code */
 
 pre {
     margin-top: 0;
@@ -86,6 +132,22 @@ code {
     padding: 2px 4px;
     background-color: rgba(#000, 0.04);
     border-radius: 4px;
+}
+
+pre code {
+    font-family: 'Hack', monospace;
+}
+
+/* Misc */
+
+address {
+   margin-bottom: 1rem;
+   font-style: normal;
+   line-height: inherit;
+}
+
+blockquote {
+   margin: 0 0 1rem;
 }
 
 figure {

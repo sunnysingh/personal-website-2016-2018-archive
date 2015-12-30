@@ -2,8 +2,17 @@
 
 	<article class="article">
 
+		{{#if this.image}}
+			<figure class="article-image">
+				<img src="/assets/images/articles/{{ this.image.name }}" alt="{{ this.image.desc }}" />
+			</figure>
+		{{/if}}
+
 		<p class="article-metadata">
-			<span class="article-metadata-group">
+			<span
+				class="article-metadata-group has-tooltip has-tooltip-top"
+				aria-label="Topics"
+			>
 				{{> icon name="tags" }}
 				{{#if this.topics}}
 					{{ this.topics }}
@@ -26,7 +35,7 @@
 			</span>
 		</p>
 
-		<div class="article-content">
+		<div class="article-content readable">
 			{{{ contents }}}
 		</div>
 

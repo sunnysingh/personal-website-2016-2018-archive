@@ -27,6 +27,7 @@
 @import 'ui/progress';
 @import 'ui/alerts';
 @import 'ui/shortcuts';
+@import 'ui/embeds';
 @import 'ui/media-project';
 @import 'ui/media-article';
 

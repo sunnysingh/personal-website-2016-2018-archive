@@ -7,7 +7,57 @@
 |
 */
 
+a.btn-subscribe {
+	border-color: #f26522;
+	color: #f26522;
+
+	&:--enter {
+		border-color: #f26522;
+		background: #f26522;
+	}
+
+	.icon {
+		position: relative;
+		top: 2px;
+		vertical-align: baseline;
+	}
+}
+
+.subscribe-readers {
+	max-width: 240px;
+	margin: 0 auto 30px auto;
+	padding-left: 0;
+	list-style: none;
+
+	li:not(:last-child) {
+		margin-bottom: 15px;
+	}
+
+	a {
+		display: block;
+	}
+}
+
+.subscribe-direct {
+	&-input {
+		display: block;
+		width: 80%;
+		margin: 15px auto 0 auto;
+
+		input {
+			display: block;
+			margin: 0;
+			text-align: center;
+			cursor: pointer;
+		}
+	}
+}
+
 .article {
+
+	&-image {
+		text-align: center;
+	}
 
 	&-metadata {
 		color: var(--gray-light);

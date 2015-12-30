@@ -1,3 +1,5 @@
-- Convert articles
-    - pandoc article.html -o article-converted.html -t html5
-    - pandoc article-converted.html -o article.md -t markdown_github
+Todo List
+---------
+
+- Write "Year in Review 2015" article
+- Add pagination to blog section: https://github.com/blakeembrey/metalsmith-pagination
