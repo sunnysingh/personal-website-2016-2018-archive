@@ -78,7 +78,8 @@
         .section-about    &-item.is-about    a,
         .section-projects &-item.is-projects a,
         .section-contact  &-item.is-contact  a,
-        .section-blog     &-item.is-blog     a {
+        .section-blog     &-item.is-blog     a,
+        .section-search   &-item.is-search   a {
             color: var(--brand-secondary);
             border-color: var(--brand-secondary);
         }

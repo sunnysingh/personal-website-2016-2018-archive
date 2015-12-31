@@ -88,7 +88,7 @@ domready(() => {
 
         });
 
-        let loadPage = (pageUrl, event, callback) => {
+        let loadPage = (pageUrl, event, options, callback) => {
 
             if (event) event.preventDefault();
 
@@ -126,10 +126,11 @@ domready(() => {
 
                 // Update history
                 history.pushState({
-                    title:   responseTitle,
-                    cover:   responseCover,
-                    content: responseContent,
-                    section: responseSection,
+                    title:      responseTitle,
+                    cover:      responseCover,
+                    content:    responseContent,
+                    section:    responseSection,
+                    subsection: responseSubsection,
                 }, null, pageUrl);
 
                 window.scrollTo(0, 0);
@@ -141,7 +142,10 @@ domready(() => {
 
                 if (callback) callback();
 
-                app.trigger('page:ready');
+                app.trigger('page:ready', {
+                    section:    responseSection,
+                    subsection: responseSubsection,
+                });
 
             });
 
@@ -156,7 +160,7 @@ domready(() => {
                         return;
                     }
 
-                    loadPage(link.getAttribute('href'), event, () => {
+                    loadPage(link.getAttribute('href'), event, null, () => {
                         link.blur();
                     });
                 });
@@ -164,8 +168,13 @@ domready(() => {
         };
 
         // Bind events
-        app.on('page:navigate', (pageUrl) => {
-            loadPage(pageUrl);
+
+        app.on('page:navigate', (pageUrl, options) => {
+            loadPage(pageUrl, null, options);
+        });
+
+        app.on('page:reajaxify', () => {
+            ajaxifyLinks(contentElement.querySelectorAll(linksSelector));
         });
 
         // Browser navigation support

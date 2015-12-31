@@ -1,0 +1,20 @@
+.search {
+	&-standalone {
+		display: none;
+		margin-bottom: 15px;
+
+		@media (--sm) {
+			display: block;
+		}
+	}
+
+	&-loading {
+		text-align: center;
+		font-size: 1.5rem;
+	}
+
+	&-empty {
+		text-align: center;
+		font-size: 1.5rem;
+	}
+}

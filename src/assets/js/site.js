@@ -10,6 +10,8 @@
 
 import './ajaxify';
 import './shortcuts';
+import './analytics';
+import './search';
 
 // Sections
 import './sections/contact';

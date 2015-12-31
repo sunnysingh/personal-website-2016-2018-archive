@@ -79,8 +79,8 @@ p {
    .readable &,
    &.readable {
        font-size: 1.2rem;
-       line-height: 1.7rem;
-       letter-spacing: .004rem;
+       line-height: 2.2rem;
+       letter-spacing: .005rem;
    }
 }
 
@@ -95,8 +95,8 @@ dl {
    .readable &,
    &.readable {
        font-size: 1.2rem;
-       line-height: 1.7rem;
-       letter-spacing: .004rem;
+       line-height: 2.2rem;
+       letter-spacing: .005rem;
    }
 
    .readable & li:not(:last-child),

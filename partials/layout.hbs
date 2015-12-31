@@ -57,12 +57,11 @@
 				<li class="nav-item is-{{ item }}">
 					<a class="has-tooltip has-tooltip-bottom" href="{{ url }}" aria-label="{{ label }}">
 						{{> icon name=item }}
-						<span class="sr-only">{{ label }}</span>
 					</a>
 				</li>
 				{{/each}}
 				<li class="nav-item is-search">
-					<a href="/search">
+					<a class="has-tooltip has-tooltip-bottom" href="/search" aria-label="Search">
 						{{> icon name="search" }}
 					</a>
 				</li>
@@ -76,9 +75,9 @@
 		</div>
 
 		<div class="search">
-			<form role="search">
+			<form role="search" data-search>
 				<noscript>Sorry, you need to enable JavaScript to search this site.</noscript>
-				<input id="search" class="input" type="search" placeholder="Search..." />
+				<input id="search" class="input" type="search" placeholder="Search articles..." />
 				<button class="hidden" type="submit">Search</button>
 			</form>
 		</div>

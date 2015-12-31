@@ -14,6 +14,7 @@ const Metalsmith  = require('metalsmith');
 const condition   = require('metalsmith-if');
 const branch      = require('metalsmith-branch');
 const collections = require('metalsmith-collections');
+const lunr        = require('metalsmith-lunr');
 const rss         = require('metalsmith-feed');
 const define      = require('metalsmith-define');
 const ignore      = require('metalsmith-ignore');
@@ -32,6 +33,7 @@ const imagemin    = require('metalsmith-imagemin');
 const htmlMin     = require('metalsmith-html-minifier');
 const gzip        = require('metalsmith-gzip');
 const appendMeta  = require('./plugins/append-meta');
+const searchMeta  = require('./plugins/search-metadata');
 const sources     = require('./plugins/sources');
 const Handlebars  = require('handlebars');
 const bs          = require('browser-sync').create();
@@ -227,7 +229,20 @@ let build = callback => {
             data: [
                 {section: 'blog'},
                 {subsection: 'article'},
+                {lunr: true},
             ],
+        }))
+
+        // Search
+        .use(lunr({
+            fields: {
+                contents: 1,
+                topics: 10,
+            },
+            indexPath: 'search.json',
+        }))
+        .use(searchMeta({
+            pattern: 'blog/**/*.md',
         }))
 
         // Handlebars

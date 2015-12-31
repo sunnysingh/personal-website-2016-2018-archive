@@ -89,6 +89,10 @@
         "disqus": {
             "shortname_prod": "sunnysingh",
             "shortname_dev":  "sunnysingh-develop"
+        },
+
+        "google_analytics": {
+            "id": "UA-71822169-1"
         }
 
     }
