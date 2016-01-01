@@ -121,7 +121,7 @@ app.on('page:ready', () => {
 	}
 
 	// Disqus expects this config variable on initial load
-	let disqus_config = () => {
+	window.disqus_config = () => {
         this.page.title      = disqusTitle;
         this.page.url        = disqusUrl;
         this.page.identifier = disqusIdentifier;
