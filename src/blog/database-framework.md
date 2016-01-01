@@ -3,6 +3,8 @@ topics: Coding, Security, PHP, MySQL
 title: Database Framework
 description: I announce and give a short tutorial for my PHP database framework.
 date: 2011-08-23 20:00
+disqus:
+  identifier: 222 http://sunnyis.me/?p=222
 ---
 
 **Notice**: I wrote this article 3 years ago and thus may contain outdated information. While I can not guarantee updates on this framework, it does wrap around MySQLi and thus should still be secure.

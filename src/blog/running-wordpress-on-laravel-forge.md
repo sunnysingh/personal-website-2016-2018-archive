@@ -3,6 +3,8 @@ topics: Coding, Dev Ops, WordPress
 title: Running WordPress on Laravel Forge (with CloudFlare)
 description: A tutorial on setting up WordPress on a Laravel Forge server, with insights on some gotchyas.
 date: 2015-04-27 13:54
+disqus:
+  identifier: 562 http://sunnyis.me/?p=562
 ---
 
 [Laravel Forge](https://forge.laravel.com/) is a fairly new service that enables PHP developers to easily host their applications on popular cloud-hosting platforms. The decision to switch to Forge was pretty easy, because I wanted easy server creation/management and the speed of [NGINX](http://nginx.com/) plus [HHVM](http://hhvm.com/). While getting WordPress initially setup on Forge was painless, I did run through some "gotchas" that made me waste hours while finding a solution. To help other developers who are trying to setup WordPress on Laravel Forge, and may also be using [CloudFlare](https://www.cloudflare.com/), here's how you setup WordPress and fix certain errors.<!--more-->

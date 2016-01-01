@@ -3,6 +3,8 @@ topics: Coding, Security, PHP
 title: Secure Passwords with Phpass
 description: A tutorial on implementing secure passwords with the Phpass password hashing library.
 date: 2011-10-11 12:55
+disqus:
+  identifier: 256 http://sunnyis.me/?p=256
 ---
 
 When we create an account on a website, we are essentially trusting the service to be secure and we pray that our data will be safe. But, is it? Implementing good security in a website can sometimes seem like a daunting task, but the trick is to attack each vulnerability one by one. Passwords are one of those vulnerabilities, and users expect that your system will securely encrypt them so that prying eyes can stay shut.
