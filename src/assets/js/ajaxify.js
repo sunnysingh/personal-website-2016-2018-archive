@@ -60,11 +60,11 @@ domready(() => {
 
         // Only play video on home section
         let updateVideoState = (section) => {
-            if (section === 'home') {
-                videoElement.play();
-            } else {
-                videoElement.pause();
-            }
+            // if (section === 'home') {
+            //     videoElement.play();
+            // } else {
+            //     videoElement.pause();
+            // }
         };
 
         // Declare what gets updated in the page
