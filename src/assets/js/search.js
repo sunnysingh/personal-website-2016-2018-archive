@@ -135,6 +135,11 @@ app.on('page:ready', () => {
 				search(terms);
 			});
 
+			if (location.pathname == '/search') {
+				search(terms);
+				return;
+			}
+			
 			app.trigger('page:navigate', '/search');
 
 		});

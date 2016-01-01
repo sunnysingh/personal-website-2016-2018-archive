@@ -11,6 +11,7 @@
 import './ajaxify';
 import './shortcuts';
 import './analytics';
+import './share';
 import './search';
 
 // Sections

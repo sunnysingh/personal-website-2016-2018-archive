@@ -31,6 +31,9 @@
 @import 'ui/media-project';
 @import 'ui/media-article';
 
+/* Vendor */
+@import 'vendor/socialshares';
+
 /* Layout */
 @import 'layout/header';
 @import 'layout/cover';

@@ -41,6 +41,34 @@
 
 	</article>
 
+	<div class="share">
+
+		<!-- Branded Twitter button -->
+		<a class="share-btn share-btn-branded share-btn-twitter"
+		   href="https://twitter.com/share?url={{ site.base_url }}{{ this.url }}&text={{ this.title }}&via=SunnySinghIO"
+	   	>
+			<span class="share-btn-icon"></span>
+			<span class="share-btn-text">Tweet</span>
+		</a>
+
+		<!-- Branded Facebook button -->
+		<a class="share-btn share-btn-branded share-btn-facebook"
+		   href="https://www.facebook.com/sharer/sharer.php?u={{ site.base_url }}{{ this.url }} "
+		>
+			<span class="share-btn-icon"></span>
+			<span class="share-btn-text">Share</span>
+		</a>
+
+		<!-- More button -->
+		<a class="share-btn share-btn-more"
+		   href="https://socialshar.es/share.html?url={{ site.base_url }}{{ this.url }} &title={{ this.title }}&text={{ this.title }}&hide-services=twitter,facebook"
+		>
+			<span class="share-btn-icon"></span>
+			<span class="share-btn-text">More</span>
+		</a>
+
+	</div>
+
 	<div
 		class="comments"
 		id="comments"
