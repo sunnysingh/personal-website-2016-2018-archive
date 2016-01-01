@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Sunny Singh]]></title><description><![CDATA[Sunny Singh]]></description><link>https://sunnysingh.io/</link><generator>metalsmith-feed</generator><lastBuildDate>Fri, 01 Jan 2016 08:46:18 GMT</lastBuildDate><atom:link href="https://sunnysingh.io/articles.rss.xml" rel="self" type="application/rss+xml"/><item><title><![CDATA[Package Managers, and why they're awesome.]]></title><description><![CDATA[
+This article is meant to cater towards beginners, but really this goes for anyone who still doesn't use any sort of package manager or understand the usefulness of one. Before I explain what package managers are, let me create a scenario for you.<!--more-->
+
+So you're building a website for yourself or a client. You want to make prototyping and designing the UI easier, so you decide to use the [Bootstrap framework](http://getbootstrap.com/). You visit the site, click download, extract the folder, and pull in the files into your project. Easy enough. Next, you realize you want some interactions, so you decide to use [jQuery](http://jquery.com/). Again, you head to the site, click download, and transfer the files to your project folder. Not too bad. Oh, there's another fancy framework/library/magicpotion that makes another task easier, so you repeat the steps for that. As you can see, this can start getting tedious if you have to repeat this for every single framework or library that you decide to use. You can easily have numerous "vendor packages" that you are using in your project, especially if you are adding small CSS or JS libraries that handle specific tasks.
+
+Let's look at that same project a couple weeks or months laters. Bootstrap, jQuery, and probably most of your other libraries (let's refer to these as packages from now on) have been updated. Perhaps you don't necessarily care about the new features, but those new versions may bring along bug fixes. This is a big deal if your website doesn't fully work in a recent browser version or on a new device that came out. The great part about packages is that you don't have to worry about fixing the tedious bugs, you can let the "experts" handle that for you while you focus on building a beautiful site. So, how do you go about updating? First, you have to know if there's a new version at all. You might be following that project on Twitter and hear about it that way, but otherwise you'll have to manually check the websites of each package. If there is an update, you repeat the steps that you went through when adding it the first time. For. Each. Package. Talk about a waste of time...
+
+## Okay, so the solution is Package Managers?
+
+It would be a twist if I said no... but yes you are absolutely correct. Package managers exist to solve this exact problem; installing external (a.k.a. "vendor") packages, and keeping them updated. Think of package managers as app stores: Simple, one-click install of apps (or packages, in our case)  that you can easily keep updated. There's different managers for different languages, but in the case of the front-end there's a popular one that I personally use called Bower.
+
+### Bower
+
+[Bower](http://bower.io/) markets itself as "a package manager for the web." This is exactly what it is, and probably is self-explainable now that you know what a package manager is. You can use it to install different packages across the web with a single command, and keep them updated likewise. Yes, this does mean that you'll have to learn some basics of using a command line, but this will greatly improve your workflow and the maintainability of your project. If you truly want to stay away from the command line, there's [CodeKit](https://incident57.com/codekit/) for Mac, and I'm not currently aware of other tools that integrate Bower.
+
+To elaborate a little on how Bower works, I should explain where these packages that you install live. For most, these packages are on GitHub and contain a `bower.json` file. This file allows package developers to publish their project on Bower, so that other developers can easily use it in their own projects. While you may be scared that a package that you use won't be available on Bower, don't be. I have yet to come across one that does not because Bower is extremely popular. In the case that the package does not exist, Bower is still able to install Git repositories, SVN repositories, or direct URLs to files (e.g. .css, .js, .zip). Oh and to avoid confusion, Bower downloads these packages into a special folder within your project, so there is no dependency on GitHub or anything like that (aside from installing or updating).
+
+You can easily install Bower with a single command, but you have to make sure that you have [Node.js](https://nodejs.org/) installed. The scope of doing that is outside of this article, but Node provides installers and Bower can be installed with a single command. Once you have all that setup, you can now run commands like so:
+
+```
+bower install bootstrap
+```
+
+Boom. You have the latest version of Bootstrap in your project. By default, this is located in a `bower_components` folder in your project, but this can be changed. You can reference the files within the `bower_components/bootstrap` folder as you normally would with Bootstrap. Since this folder is managed by Bower, you can now do this:
+
+```
+bower update
+```
+
+You just updated Bootstrap and all your other packages. That's it. See how the issues that I talked about earlier seem to fly away?
+
+### Other Managers
+
+Of course, package managers exist for other languages and have for a long time. Bower is fairly new, and us web developers are probably not used to this concept. This is also new to a lot of PHP developers, for which I highly recommend you check out [Composer](https://getcomposer.org/). If you're using [Laravel](http://laravel.com/), then you're already using Composer. And keep in mind that you don't have to use Bower, there's [Duo](http://duojs.org/), [Jam](http://jamjs.org/), or Node's pre-installed [npm](https://www.npmjs.com/). There is no right or wrong answer, just use whatever makes you more efficient. If you still prefer the old-fashioned method, that's fine too (but I'll probably look at you differently).
+
+## Looking Ahead
+
+This sort of stuff gets me excited about building websites and web apps. I'm constantly looking for ways to improve my workflow, and package managers greatly help in the building and maintenance of my projects. Other topics that you might want to look into are CSS preprocessors (Less and Sass are extremely popular, but have you heard of [PostCSS](https://github.com/postcss/postcss)?), dependency management ([Browserify](http://browserify.org/) or [webpack](http://webpack.github.io/)), and task runners ([gulp.js](http://gulpjs.com/) or [Grunt](http://gruntjs.com/)). I will hopefully write about these in the future.
+]]></description><guid isPermaLink="false">Package Managers, and why they&apos;re awesome.</guid><pubDate>Tue, 02 Jun 2015 23:54:00 GMT</pubDate></item><item><title><![CDATA[Running WordPress on Laravel Forge (with CloudFlare)]]></title><description><![CDATA[
+[Laravel Forge](https://forge.laravel.com/) is a fairly new service that enables PHP developers to easily host their applications on popular cloud-hosting platforms. The decision to switch to Forge was pretty easy, because I wanted easy server creation/management and the speed of [NGINX](http://nginx.com/) plus [HHVM](http://hhvm.com/). While getting WordPress initially setup on Forge was painless, I did run through some "gotchas" that made me waste hours while finding a solution. To help other developers who are trying to setup WordPress on Laravel Forge, and may also be using [CloudFlare](https://www.cloudflare.com/), here's how you setup WordPress and fix certain errors.<!--more-->
+
+## Getting your site on Forge
+
+While you technically have access to your Forge server through FTP, I would highly recommend that you take the approach of developing your site locally, setting it up as a Git repository (use [Bitbucket](https://bitbucket.org/) if you want private repos), and then using the deploy script provided by Forge. There are many tools for developing locally such as [MAMP](https://www.mamp.info/), but I would recommend using [Vagrant](https://www.vagrantup.com/). The easiest way to get setup with Vagrant is through [Laravel Homestead](http://laravel.com/docs/5.0/homestead) (which is not just for Laravel applications). This article is not about Git or Vagrant, but there are numerous resources on these two tools that you can find.
+
+Once you got your site's code on GitHub, Bitbucket, or elsewhere, you can add a new site on Forge and enter your repository's name. **Important**: Uncheck the "Install Composer dependencies" option. You can leave it checked if you are actually using Composer in your WordPress project.
+
+After the site is setup, edit your deploy script. Make sure to remove or comment out the following lines from it:
+```
+composer install --no-interaction --no-dev --prefer-dist
+php artisan migrate --force
+```
+
+At this point, you can enable the "Quick Deploy" option which automatically uploads your files every time you make a Git push.
+
+## NGINX Configuration
+
+Unlike Apache, NGINX does not have an `.htaccess` or `httpd.conf` file to configure virtual hosts, redirects, etc. Instead, you have to edit the NGINX Configuration (`nginx.conf`) file which is provided in the Forge dashboard in a dropdown menu at the bottom of your site's details page.
+
+In your NGINX configuration, you have to change the lines that contain `location / { ...` to this:
+
+```
+# Send all requests to WordPress
+location / {
+    try_files $uri $uri/ /index.php?q=$uri&$args;
+}
+```
+
+This mimics WordPress' "pretty permalinks" functionality that would normally be done through htaccess.
+
+## No errors? Good!
+
+If you go to your site's domain and everything is working, you're good to go. However, this is where I realized that I couldn't access the WordPress admin dashboard. It seems like putting CloudFlare into the mix along with its Flexible SSL option makes either the whole site or just the admin go into an infinite loop of redirects. In Google Chrome, it says: "There were too many redirects."
+
+## Fixing "Too Many Redirects" Error
+
+There are many things you can try to fix this error. First, try renaming your plugins folder to disable them, or see if you're doing something weird within your `wp-config.php` or theme's `functions.php` files. Both of these were fine for me, so I moved on with the following solutions.
+
+### HTTP_X_FORWARDED_PROTO
+
+Because CloudFlare acts as a reverse proxy, you have to add the following to your `wp-config.php`:
+
+```
+<?php
+
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+	    $_SERVER['HTTPS'] = 'on';
+```
+
+This tells WordPress when the user is accessing the site through HTTPS.
+
+### Add a CloudFlare Page Rule
+
+In your CloudFlare websites dashboard, click the settings icon and go to "Page rules." Then, add a new rule for `yoursite.com/wp-admin/`. Under this rule, disable "Always use https" and disable SSL.
+
+### Modify NGINX Configuration
+
+I also had to modify my NGINX configuration with the following:
+
+```
+# Add this below the "location / " block that we added earlier:
+rewrite ^/wp-admin/?$ /wp-admin/index.php permanent;
+
+# Change the "fastcgi_param SCRIPT_FILENAME $document_root;" part within the "location ~ \.php$" block with this:
+fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name;
+```
+
+### Force SSL
+
+This isn't necessarily a solution, but I want to point out that I am using the [Force SSL](https://wordpress.org/plugins/force-ssl/) WordPress plugin for redirecting all non-http requests to https. Make sure that when you have this plugin installed, that the plugin itself is not causing any redirect loops. This plugin did not cause any issues for me, and I wanted something that did not rely on editing configuration files. You can also do this through CloudFlare's page rules or NGINX configurations.
+
+If all goes well, your site should be fully working now, and running fast with Laravel Forge's server setup.
+
+## Conclusions
+
+I hope that this article helps someone out, because I don't want someone else to waste their time like I did. If I missed something or was unclear, please let me know!
+]]></description><guid isPermaLink="false">Running WordPress on Laravel Forge (with CloudFlare)</guid><pubDate>Mon, 27 Apr 2015 17:54:00 GMT</pubDate></item><item><title><![CDATA[Common Metadata]]></title><description><![CDATA[
+For every new project, you have to consider the metadata that will go inside of your `<head>` tag. The main ones that you normally care about are the title and app icon (typically known as the favicon), but there are also some obscure ones that you need to consider for security and/or SEO purposes. For these reasons, I wanted to post this as a resource to myself and others.
+
+## Charset
+
+```
+<meta charset="UTF-8" />
+```
+
+This declares the character set of the page, and should be put early in the `<head>`. UTF-8 is a good default.
+
+## X-UA-Compatible
+
+```
+<meta http-equiv="X-UA-Compatible" content="IE=Edge, chrome=1" />
+```
+
+This is an interesting tag that is specific to IE users. Basically, it tells IE to render the page in the highest mode (meaning no compatibility mode). The `chrome=1` part also enables Google Chrome Frame for those that use it. Chrome Frame is unfortunately [retired now](http://blog.chromium.org/2013/06/retiring-chrome-frame.html) but is still a good idea to enable in case some users still have it installed.
+
+Declare this tag early as well, probably right after the charset.
+
+## Title
+
+```
+<title>My Web App - Sign In</title>
+```
+
+This is what appears in the browser tab, search engine results, etc.
+
+## Application Name
+
+```
+<meta name="application-name" content="My Web App" />
+```
+
+Similar to `<title>`, but is specific to the actual name of the website or web app (versus the page name). This info is typically used when pinning the site or adding to the homescreen.
+
+## Application URL
+
+```
+<meta name="application-url" content="/" />
+```
+
+Speaking of pinning and adding to homescreens, you'll want to set the application URL to the "homepage" or root.
+
+## Caronical URL
+
+```
+<link rel="canonical" href="http://mywebapp.com/this-is-the-permalink/" />
+```
+
+This tag is important in preventing [duplicate content](https://support.google.com/webmasters/answer/66359?hl=en) issues in search engines. Put simply, it is the permanent link (permalink) for the current page, even if it being served under a different URL.
+
+## Description
+
+```
+<meta name="description" content="My Web App is the coolest app that lets you do cool things." />
+```
+
+The description tag is mainly for SEO purposes, but social media sites use this as the link preview text when users share the page.
+
+## Robots
+
+```
+<meta name="robots" content="noodp" />
+```
+
+This is a very obscure tag, especially when you try to make sense of the "noodp" part. Put simply, this tells search engines to *not* retrieve webpage info from [DMOZ](http://www.dmoz.org/), which is the Open Directory Project. It takes DMOZ a couple days to re-crawl your page, and sometimes the info isn't as accurate as you want it to be.
+
+You might be aware of another variant of this tag that has "noodp,noydir". The "noydir" part disables listings from Yahoo! Directory, but it has been shut down so I see no reason to keep including it.
+
+## Viewport
+
+```
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+```
+
+If you want to make your website responsive, this is the standard tag to use. It will render your page at the device's width and set the zoom level to 100%. Be aware of code snippets that have `user-scalable=no` because even if your page is responsive, you still want to allow users to zoom in if they can't read certain text or want to see an image closer.
+
+## Icon
+
+```
+<link rel="icon" sizes="192x192" href="/icon-192.png" />
+<link rel="icon" sizes="128x128" href="/icon-128.png" />
+<link rel="apple-touch-icon" sizes="128x128" href="/icon-128.png" />
+<link rel="apple-touch-icon-precomposed" sizes="128x128" href="/icon-128.png" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+```
+
+A simple 16x16 favicon is no longer enough due to all the different platforms and mobile OS's. The code above is the most basic if you want to provide a nice high-resolution icon for desktop browsers and Android/iOS. However, you should try this [Favicon Generator](http://realfavicongenerator.net/) to create icon files and the proper tags for desktop browsers, Windows 8 tiles, Windows taskbar, Android, and iOS.
+
+Make sure that edit as necessary the `/icon-*` and `/favicon.ico` paths depending on where you are storing the icon files.
+
+## Image Source
+
+```
+<link rel="image_src" href="image.png" />
+```
+
+Similar to icon, except the scenario here is that you want to provide a specific image for the current page. This is useful for blogs, video sites, etc. and most social media sites will use this when displaying shared web pages.
+
+Make sure that you edit as necessary the `image.png` path depending on where you are storing the image.
+
+## Theme Color
+
+```
+<meta name="theme-color" content="black" />
+```
+
+To my knowledge, Chrome for Android Lollipop is the only browser to support this tag. It changes the toolbar color considering that you set the `content` attribute to a valid CSS color. Subtle but neat effect if you want a good experience for your Android users.
+
+## Extras
+
+I left some metadata out of this post because they are big enough on their own to be separate articles. I don't believe that they are any less important, but do require some extra reading into.
+
+### Search Engines
+
+* [Schema.org](http://schema.org/) - Also used by Google+
+* [Structured Data Markup](https://developers.google.com/structured-data/) - Provide more functional search results, Google Now cards, etc.
+
+### Social Media
+
+* [The Open Graph protocol](http://ogp.me/) - Used by Facebook and Google+
+* [Twitter Cards](https://dev.twitter.com/cards/overview)
+
+### Other
+
+* [OpenSearch](http://www.hanselman.com/blog/OnTheImportanceOfOpenSearch.aspx) - Explanation and tutorial by Scott Hanselman
+* [humans.txt](http://humanstxt.org/) - Provide info about site's team, contributors, tech, etc.
+* [Rel-Payment](http://relpayment.com/) - Provide payment info
+
+I did a lot of research to put this post together, but if I missed anything or made a mistake, let me know! On that note, you are also free to shame me for not including some of the metadata from this post on my own projects.
+]]></description><guid isPermaLink="false">Common Metadata</guid><pubDate>Fri, 10 Apr 2015 16:15:00 GMT</pubDate></item><item><title><![CDATA[Share Buttons]]></title><description><![CDATA[
+Sharing has become a ubiquitous function of the web. While it is arguable that we really don't need them (since browser extensions, mobile apps, and copy-and-paste exist), developers love them for the marketing aspect and as an incentive for users to share their content. This would be all be great if only sharing buttons did not slow down pages, track users, and/or inhibit a consistent design.<!--more-->
+
+## The Issues: Page bloat, privacy, and design!
+
+Let me elaborate. The issues with share buttons or scripts have been brought up before by [Stephen Morley](http://code.stephenmorley.org/javascript/social-sharing-that-respects-visitor-privacy/) and [Jonathan Suh](https://jonsuh.com/blog/social-share-links/), and I share the same opinion with them (no pun intended).
+
+First, the page bloat. If you add a Tweet and Facebook Share button to your site, you end up loading two separate JavaScript files (that along with them load more resources). These resources reside on two external domains, which simply end up slowing down your page. You can argue that these domains are CDNs and load really fast (along with probably being cached), but it's still a fact that your page will be issuing multiple HTTP requests. It's extra kilobytes that most pages really don't need, and you can look at the stats or your browser's developer tools to see the impact for yourself.
+
+The second problem is privacy. While I personally don't care, many other users simply don't want to be tracked across the web (for advertising or even analytical purposes). You also have to consider your site's own privacy policy when loading these share scripts, because the data is easily accessible by social networks. It really eases thing when you don't load third-party scripts.
+
+Finally, adding multiple share buttons means they may not be consistent with each other, or your site's design. This can be a small or big issue, but I find it really ugly when I see a cluster of social buttons that ruin a good-looking site.
+
+## Introducing Share Buttons
+
+This is where I shamelessly promote my [Share Buttons](https://github.com/sunnysingh/share-buttons) project. What I've done is I made my own HTML/CSS buttons that you can simply drop-in to your project. You can add the same share popups as traditional share scripts through JS, and it's completely up to you on how you want to include the CSS and JS (both of which you are free to customize). Share Buttons solves all the issues that I've mentioned: you're not loading multiple files from external domains, your users' data stays on your own site, and the design is consistent across each button (and is easily changed via CSS if you're not happy with it).
+
+### Share URLs
+
+The buttons work with or without JS, thanks to share URLs. These URLs are similar to APIs in the sense that you add parameters in the share URLs depending on what you want to share. Some services provide multiple parameters, such as `via` and `related` for Twitter, but normally you just need the `url` parameter. I have all the available URL formats based on what icons Share Buttons provides in the [markup docs](https://github.com/sunnysingh/share-buttons/blob/master/README.md#markup). Go read Jonathan's article if you want all the specifics, which I'll eventually add to the docs.
+
+### Demo
+
+If you want to check out the demo, [here it is](http://codepen.io/sunnysingh/pen/OPxbgq):
+http://codepen.io/sunnysingh/pen/OPxbgq
+
+The icons are simply a `@font-face` icon set from [IcoMoon](https://icomoon.io/), but are also optional. The markup is really simple and I've written the CSS with Less so you can `@import` the source file in your own stylesheet.
+
+### Downsides
+
+Unfortunately, simply using URLs means you lose out on certain features of traditional share scripts. The main downside is you don't get share counts, which can still technically be done through APIs (although would require more work). However, the benefits of a faster page load and having the buttons look however you want (whether you customize Share Buttons or roll your own solution) outweigh these downsides.
+
+I hope to improve this project over time, but this is a good start.
+
+## Share Responsibly
+
+That's it. I've neglected to provide a tutorial here because I think the docs are pretty straightforward, but I am free to answer any questions. The [project is on GitHub](https://github.com/sunnysingh/share-buttons) so that means you can help me fix bugs, add features, and submit issues. I've already noticed a display issue on Chrome for Android, so I hope to fix that sometime soon.
+
+You should also notice that I'm [dogfooding](http://blog.codinghorror.com/the-difficulty-of-dogfooding/) right below this article, so share away!
+]]></description><guid isPermaLink="false">Share Buttons</guid><pubDate>Sun, 01 Mar 2015 19:06:00 GMT</pubDate></item><item><title><![CDATA[Podcasts I Listen To]]></title><description><![CDATA[
+Podcasts are really great when you commute or need something to make work more interesting. If you're not familiar with them, they're basically "radio shows" but specific to certain topics. Typically podcasts are audio-only, but video versions exist as well. Thanks to the Pocket Casts app that I mentioned in my [Apps for College post](http://sunnyis.me/blog/apps-for-college/), it is really easy to search and add podcasts to your library. Here's mine.
+
+## Tech Podcasts
+
+### The Vergecast
+
+I've been listening to The Vergecast for a long time, and I really miss Joshua Topolsky's constant cutting people off and rants, but I still like where the podcast is at right now. Obviously you expect tech news much like their website, but they talk about "culture news" or other random stuff sometimes too.
+
+[Listen to The Vergecast](http://www.theverge.com/label/the-vergecast)
+
+### This Week in Google
+
+TWIT.TV provides a lot of podcasts, but the one that I listen to is This Week in Google. Like the title suggests, the cast mainly talk about Google news, but really anything tech-related goes.
+
+[Listen to This Week in Google](http://twit.tv/show/this-week-in-google)
+
+### Daily Tech News Show
+
+DTNS provides daily, short, and to-the-point tech shows. I find it hard to listen to each and every one considering they're daily, but this one is less discussion compared to the other podcasts I've listed so far.
+
+[Listen to Daily Tech News Show](http://www.dailytechnewsshow.com/)
+
+### Android Central Podcast
+
+The Android Central Podcast is a good source for Android-related news, but it can get a bit boring sometimes. I mainly listen after big events (e.g. Google I/O, Nexus announcements).
+
+[Listen to Android Central Podcast](http://www.androidcentral.com/podcast)
+
+## Web Development Podcasts
+
+### ShopTalk
+
+I think I found out about the ShopTalk show through [CSS-Tricks](http://css-tricks.com/), which has been one of the best resources for web design articles and tutorials. The cast of Chris Coyier, Dave Rupert, and a guest talk about different coding-related topics and answer listener questions. This podcast is mainly about front-end development, but you might hear about server-side depending on the guest.
+
+[Listen to ShopTalk](http://shoptalkshow.com/)
+
+### CodePen Radio
+
+If you're building a web app or web-based company, I highly recommend CodePen Radio. The founders talk about the different topics that you normally have to have taken care off while running a web app, such as Software, Backups, and Security.
+
+[Listen to CodePen Radio](http://blog.codepen.io/radio/)
+
+### The Laravel Podcast
+
+If you use the beautiful [Laravel framework](http://laravel.com/), then no doubt listen to The Laravel Podcast. The show is hosted by Shawn McCool. Creator Taylor Otwell and Jeffrey Way (the creator of Laracasts) appear regularly.
+
+[Listen to The Laravel Podcast](http://www.laravelpodcast.com/)
+
+### Style Guide Podcast
+
+Style guides are very useful when working with teams, so why not improve yours? The Style Guide Podcast hosts interviews, usually talking about the style guides of popular companies.
+
+[Listen to Style Guide Podcast](http://styleguides.io/podcast/)
+
+## Other
+
+### Stuff You Should Know
+
+Just a fun little podcast that answers many questions, typically in the format of "How ____ works." I listen to this podcast whenever I want a general podcast, and I was quite surprised at how much I enjoy listening.
+
+[Listen to Stuff You Should Know](http://www.stuffyoushouldknow.com/podcasts/)
+
+## What do you listen to?
+
+Whether it be gaming, tech, coding, or whatever... what do you listen to? I would love to expand my library with your suggestions.
+]]></description><guid isPermaLink="false">Podcasts I Listen To</guid><pubDate>Sun, 15 Feb 2015 17:15:00 GMT</pubDate></item><item><title><![CDATA[Apps for College]]></title><description><![CDATA[
+As both a technology enthusiast and college student, I figured that writing a post like this could be helpful to others in college or even high school (depending on your allowed use of tech in school). This is a list of the apps/services that I use to stay on top of things for class.
+
+## Google Drive
+
+Drive is a great and free alternative to Microsoft Office, and I love being able to access documents on my phone. Also, when it comes to group projects, I tend to suggest Drive to my group for the collaboration features. I am really quite surprised at how many people still carry their files on a USB drive, so if you're on of those people I think you should give Drive or other online office services a try.
+
+[Go to Google Drive](https://drive.google.com/)
+
+## Timetable
+
+Timetable is an Android app that manages your class schedule, tasks, and quizzes/exams. What makes this different from a typical notes or calendar app is that you have all your class-related stuff in one place and it can do things such as silencing your phone when you're in class. I normally have the schedule and tasks widgets on one of my home screens for quick access and it keeps me on-task for when assignments are due.
+
+[Go to Timetable](http://timetable.im/)
+
+## Google Keep
+
+When it's overkill to use Drive for a simple note, or Timetable when it isn't an assignment, I use Keep. It's a really bare note-taking app that is basically a digital equivalent to Post-it notes. I like how it syncs up with my Google account, has the basic yet necessary features, and it recently added the ability to share notes with other people (e.g. shopping lists) which I use with my family.
+
+[Go to Google Keep](https://keep.google.com/)
+
+## Trackthisforme
+
+If you're trying to improve your lifestyle or work ethic, a great motivator is when you keep track of those things. Trackthisforme is a cool service that I use to keep track of exercise (e.g. number of pushups), sleeping hours, or homework hours.
+
+[Go to Trackthisforme](http://www.trackthisfor.me/)
+
+## Pocket Casts
+
+A good way to stay up to date on what's in your major (in my case, the latest frameworks or web technologies) is to listen to podcasts. There's podcasts on just about anything, and is a great way to pass time while at work or typing up assignments. Pocket Casts is my podcast player of choice. While it's paid, I think the interface and syncing feature is totally worth it. I'll probably write a post soon on which tech podcasts I listen to.
+
+[Go to Pocket Casts (web version)](https://play.pocketcasts.com/)
+[Go to Pocket Casts (mobile apps)](http://www.shiftyjelly.com/android/pocketcasts)
+
+## StudyRoom
+
+StudyRoom is basically a social network for college students. You pick your college and courses, and then you can see what other students are sharing about that course. It's a great way of finding out what you've missed in a class, or for creating a study group. This is especially useful for when you're not taking a class together with a friend.
+
+[Go to StudyRoom](https://www.getstudyroom.com/)
+
+## Amazon Prime
+
+Odds are, you're going to college to get a good job and make a lot of money. Which means you don't have a lot of money now. That's where I highly recommend Prime if you order a lot of stuff from Amazon. Whether it's education related or not, those shipping fees *will* add up. What's nice with Prime is that you get a student discount, access to other services (Instant Video or Music), and free 2-day shipping. I'm really spoiled with that 2-day shipping now, but I don't regret it.
+
+[Go to Amazon Prime](https://www.amazon.com/gp/prime?refcust=VQZAJ2M6L2EV6XIRUVJHD6L75A&ref=mrp_refd_em_prime_clk)
+
+That's it. I wanted to keep this list relatively short but if you have any other recommendations please feel free to share them.
+]]></description><guid isPermaLink="false">Apps for College</guid><pubDate>Thu, 29 Jan 2015 17:47:00 GMT</pubDate></item><item><title><![CDATA[End of Year Review]]></title><description><![CDATA[
+Every year, I wonder how it's already the holiday season. Moments later, I see the ball drop on TV (sadly never seen it in real life, despite having lived in New York half my life). Boom, 2015 is upon us. To partly make up for the fact that I don't post often on here, I thought the least that I could do is sum up all of the stuff from this year.
+
+## Ninjality
+
+Ninjality, as you might know, is the company that [Kyle](http://kylemcd.com/) and I started for doing client work. Its other purpose is to represent our other projects. Early in the year, we gave the site a well-deserved refresh of the design. You can [read the blog post](http://ninjality.com/blog/redesign) about the redesign, but the takeaway is that it was our first responsive site that would lead many other responsive projects.
+
+Around March, a friend of ours, Leon Hitchens, wanted a new theme for his technology blog [Digital Bounds](http://digitalbounds.com/2014/03/10/we-look-a-little-different-now/). This was a fairly big project but we like the result (although I can see where I can improve it at this point). It's a simple and responsive design with a blue color scheme and I enjoyed working with [WordPress](https://wordpress.org/) and [Bootstrap](http://getbootstrap.com/).
+
+The second project was for a client that runs a podcast show on YouTube called [Pimp My Setup](http://pimpmysetup.com/). Kyle got us the job to create a "waiting queue" for the site. It took me about a month but I finally have a working version over at [pimpmysetup.com/queue](http://pimpmysetup.com/queue/). Due to lack of full knowledge of the project, I had to iron out a lot of bugs but eventually got a pretty good system going for submitting setups and displaying them. It was also a good way for me to get back into PHP, MySQL, and front-end.
+
+Overall, what we've done with Ninjality so far is pretty great. We're slowly creating a name for ourselves along with a portfolio of awesome work for awesome people.
+
+## Hylus
+
+Hylus is probably the longest ongoing project at Ninjality. We released the beta in the beginning of 2012 and the current site still has not come out of beta. At this point, we decided to completely revamp and start over. If you don't know yet, Hylus is a social network that is built mainly by Kyle and I (hopefully a bigger team in the future). In a world of social apps, it's hard to stand out but we're hoping that simplicity and a focus on connecting people with others will make people want to try it out.
+
+On the development side of things, the web app is responsive thanks to Bootstrap and I'm trying out some fun front-end tools such as [Webpack](http://webpack.github.io/) and [Bower](http://bower.io/). To get the server-stuff working, I'm coding with the awesome [Laravel framework](http://laravel.com/), and we're collaborating via [Git version control](http://git-scm.com/) and [Vagrant development environments](https://www.vagrantup.com/).
+
+I can't guarantee a release date for the new Hylus, but we'll hopefully have something ready Q1/Q2 of 2015. Regardless, I'm super excited to give a better social experience.
+
+## This site...
+
+Finally, I should probably put in a few words about my personal site. The biggest update was, you guessed it, a redesign which I [posted about this summer](http://sunnyis.me/blog/site-update-v2/). It was a really big deal because my custom WordPress theme was completely lost in a server issue, so being able to get rid of the temporary default theme was great. This was also my first nab at doing local development which is pretty much my go-to way of coding now. I really want to start posting more on the blog, especially tutorials, but we'll see what happens in 2015.
+
+## What's to come?
+
+Overall, it wasn't too busy of a year but I'm glad that I was more active in web development than the previous year. I was able to get into local development, responsive design, and got experience with the new tools that were released. I really enjoyed working with the clients for Ninjality and seeing my work published on a non-personal project.
+
+As far as 2015 goes, I want to continue what I've been doing and expand my experiences and portfolio. I predict that Hylus will be a highlight for next year and perhaps I'll have other projects on the way as well. On a personal note, I will be going into my senior year next fall at [UNC Charlotte](http://www.uncc.edu/) so that will be both sad and exciting. With that, Happy New Year's and I hope you all had an awesome 2014!
+]]></description><guid isPermaLink="false">End of Year Review</guid><pubDate>Wed, 31 Dec 2014 23:08:00 GMT</pubDate></item><item><title><![CDATA[Box Model Reset]]></title><description><![CDATA[
+You may or may not know what a box model is, but if you've coded HTML and CSS then you are already familiar. In layman's terms, every element on a page is a "box" and a box model includes all the margins, padding, borders, and content of that element. The default box model in CSS uses `content-box` which calculates dimensions of an element by adding up the total width/height, padding, and borders. We're all used to it, but there's a better box model that you should consider using.
+
+## content-box, and why it sucks
+
+Let's talk about the default box model, `content-box`. This property can be changed with the `box-sizing` property, but I'll get to that in a bit. When you're working on a project, you decide to set some common properties on an element:
+
+```
+element {
+  width: 200px;
+  height: 200px;
+  padding: 10px; /* shorthand for 10px of padding on each side */
+}
+```
+
+With this CSS, you expect the width of the element to be 200 pixels, right? While this would make sense, remember that the default box models adds padding and borders when it calculates the dimensions of an element. So in this case, the actual width is 220 pixels because of the 10 pixels of padding on each side.
+
+This might not sound like a big deal, after all this is simple math. But the real annoyances arise when you're creating columns and using percentage widths. Something like this would not work:
+
+```
+.column-left {
+  width: 50%;
+  float: left;
+  padding: 10px;
+}
+
+.column-right {
+  width: 50%;
+  float: right;
+  padding: 10px;
+}
+```
+
+It would make sense for each column to be half a page, but the padding makes the width be `50% + 20px`. This means each column will be more than half a page, and thus unable to be floated next to each other. You *could* use pixels and then factor in padding into the column width, but then it becomes a lot harder to make responsive layouts. Plus, imagine changing the padding on an element in another CSS file and potentially screwing something up without knowing it. This results in hours of bug hunting, and we've all been there.
+
+## border-box, and why it's awesome
+
+The alternative box model that I want to talk about is `border-box`. Unlike `content-box`, it obediently displays elements at their declared widths. You can reset the box model to use `box-sizing` on every element with the following CSS:
+
+```
+/**
+ * Changes the default box model from content-box to border-box.
+ */
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+```
+
+This reset will make every element use the `border-box` property. I've also added inheritance so that you are still able to use `content-box` on a specific element (and every element inside it) like so:
+
+```
+.use-default-box-model {
+  box-sizing: content-box;
+}
+```
+
+Chances are that you won't have to ever again use `content-box`, but it's something that's good to know in case you have outdated code or third-party CSS (i.e. plugins) in your project.
+
+To see why this alternative box model is awesome, let's go back to our original example and assume that the above reset is included in the same page:
+
+```
+element {
+  width: 200px;
+  height: 200px;
+  padding: 10px;
+  border: 5px solid black;
+}
+```
+
+With `box-sizing` set to `border-box`, this element's width would be 200 pixels. The element still has 10 pixels of padding, and I've also added a 5 pixel black border for flair, but the overall width is still whatever you declare in the `width` property. Same goes for `height`.
+
+To see the difference of the two box models in action, check out the [demo](http://codepen.io/sunnysingh/pen/IpdEG):
+http://codepen.io/sunnysingh/pen/IpdEG
+
+## Use it!
+
+I've seen a lot of people switching over to `border-box`, even the popular [Bootstrap framework](https://github.com/twbs/bootstrap/blob/master/less/scaffolding.less#L6). This doesn't mean that you have to transition every one of your sites to it, but new projects are great opportunities for trying out new stuff. I was against it at first although I loved the idea, but I am now fully for it.
+]]></description><guid isPermaLink="false">Box Model Reset</guid><pubDate>Wed, 23 Jul 2014 01:45:00 GMT</pubDate></item><item><title><![CDATA[Google I/O 2014 recap and thoughts]]></title><description><![CDATA[
+It's only been day one of Google's yearly developer conference, but typically a lot of the major products and updates are announced at the keynote. As both a tech geek and a developer, I was excited about all the things that were shown today, so here's a recap and my thoughts.
+
+## Android L and Material Design
+
+We still don't know what the "L" will stand for (Android Lollipop?), but the demos showed a new interface and some small features. The new interface is part of Google's new [Material Design](http://www.google.com/design/) initiative that will be used across their products (including Web and Chrome). Interesting enough, you can start using Material Design on the web with [Polymer](http://www.polymer-project.org/docs/elements/material.html). I wonder if developers will actually start using Material to build web apps, but I'll definitely experiment with it in some way. Regardless, a consistent UI is nice.
+
+As far as the features go, I'm most excited about the new runtime (ART) that will improve performance, the battery-saving mode, and the overhauled lockscreen notifications. The biggest "feature" of Android will probably be the fact that you will have it on your phone, watch, TV, and in your car.
+
+## Android Everywhere
+
+So speaking of watches, TVs, and cars, Google respectively announced Android Wear, Android TV, and Android Auto. Both the LG G Watch and the Samsung Gear Live are already [available on the Play Store](https://play.google.com/store/devices/collection/promotion_5000135_android_wear_us), but I'm still waiting on the [Moto 360](https://moto360.motorola.com/) as it looks to be the most well-designed of the 3. Wear watches basically give you a way to get notifications on your wrist, but you can also do voice commands and make quick replies. I do still like my classic Pebble watch, but I am due for a nicer looking and more integrated watch.
+
+There's not too much to say about Android TV and Android Auto. TV is similar to Amazon Fire TV, Roku, and so on except with Google integration. I already liked the way that Google TV was done (we still have a Sony Internet TV in the house), but not everyone will agree. Android Auto allows you to essentially mirror your phone's functions to the car's display, and get Google Maps navigation, music controls, and voice actions. Most of the car manufacturers are in on it, so we'll see how soon cars start rolling out with Android integration.
+
+## Thoughts
+
+There was some other news, such as being able to edit Microsoft Office files in Google Drive, Google Fit Platform, and Android apps soon to run on Chromebooks. Obviously all the new Android stuff overshadowed everything else.
+
+I don't plan for this blog to be a news site of any sort, but from time to time I will post something either tech related or something that I get really excited about. I hate to wait for Android L and the Moto 360, but I'm glad to see Google I/O being full of updates this year.
+]]></description><guid isPermaLink="false">Google I/O 2014 recap and thoughts</guid><pubDate>Thu, 26 Jun 2014 01:33:00 GMT</pubDate></item><item><title><![CDATA[Redesign and other things]]></title><description><![CDATA[
+The last time that I posted on this blog was about 3 years back, so it's really awesome to be able to write again. Where have I been? Mainly college and working at my part-time job, but I've been working on things here and there. I'm glad to be back in the web development community though, and to start things off I want to talk about the redesign on my personal site.<!--more-->
+
+## The Redesign
+
+I've started working on this design about a year ago, but never got to finishing it. After losing my previous design due to a server failure, I decided that I would just redo everything. Now that most of the web is mobile, I decided that I absolutely needed to make the layout responsive, and I also wanted it to look modern yet simple. I believe this redesign is a good result.
+
+While I mingled a bit with [Anchor CMS](http://anchorcms.com/), I decided that WordPress was just more complete in terms of features. My biggest appeal to Anchor was its Markdown support, but I came across [Jetpack Markdown](http://wordpress.org/plugins/jetpack-markdown/) and it's working really well so far. I am also using [Prism](http://prismjs.com/) for highlighting code on the site, [CodePen](http://codepen.io/) embeds for demos, and I'm sticking with [Disqus](https://disqus.com/) for comments.
+
+On the development side, I coded everything in [Sublime Text](http://www.sublimetext.com/) and used [CodeKit](https://incident57.com/codekit/) for mainly compiling assets and previewing the site. The icon fonts are provided by the awesome [IcoMoon](http://icomoon.io/) service. I guess I should also mention that this is one of the first times that I've worked on a project locally, and it's a workflow that I'm enjoying so far.
+
+The designing of the logo was done in [Sketch](http://bohemiancoding.com/sketch/) because I wanted to have it as a vector. I'm embedding it on the site as an SVG for the browsers that support it.
+
+I think the only "boring" part of the design is the homepage, as there isn't a lot of stuff going on there. I'm planning to fix that in the future. I definitely recommend that you look around all the pages as I've added extra stuff such as the [Tech/Setup](/about/tech/) section.
+
+## Ninjality
+
+If you don't know yet, I run a web design company with Kyle McDonald called [Ninjality](http://ninjality.com/). We recently updated the site with a new design and also added a blog (thanks to Anchor CMS). We've also done a big redesign of [Digital Bounds](http://digitalbounds.com/), a tech news site and I am very happy with how it turned out so far. I'm adding this here because that is something that I've been working on during my hiatus.
+
+Hopefully we can do more work for clients in the future, and I will post updates on any work that is worth sharing.
+
+## What to expect
+
+I plan to be involved more on the site again, mainly posting code tutorials and updating content when necessary. My [Secure Passwords](/blog/secure-passwords/) article has received a lot of great feedback and I would like to continue to do stuff like that in the future.
+
+Code-wise, I want to work on Hylus again and maybe even create smaller web apps to expand my portfolio. Other than that, I'm glad to finally release this redesign.
+]]></description><guid isPermaLink="false">Redesign and other things</guid><pubDate>Sun, 22 Jun 2014 21:12:00 GMT</pubDate></item><item><title><![CDATA[Secure Passwords with Phpass]]></title><description><![CDATA[
+When we create an account on a website, we are essentially trusting the service to be secure and we pray that our data will be safe. But, is it? Implementing good security in a website can sometimes seem like a daunting task, but the trick is to attack each vulnerability one by one. Passwords are one of those vulnerabilities, and users expect that your system will securely encrypt them so that prying eyes can stay shut.
+
+A while back I decided that I wanted to learn more about proper password encryption, and so I came across [Phpass](http://www.openwall.com/phpass/ "Portable PHP password hashing framework"): a framework aimed at simplifying the process for encrypting or "hashing" passwords. Phpass has been integrated into many well-known CMS's such as WordPress, Vanilla, phpBB, and Drupal, and is a huge reason for why I trust this framework. The only downside was that I could not find an easy-to-follow tutorial on using it, so I decided to write my own.
+
+Current Insecure Techniques
+---------------------------
+
+Before we jump into Phpass, let's take a look at some of the wrong techniques of storing passwords. First would be pretty obvious: storing the raw password. Not only does this open up your website to hackers, but legal authorities will probably come after you as well. The next and probably most popular way that developers secure passwords is by the use of the `md5()` function. It's better than storing raw passwords, but is not well suited for password encryption as it can easily be broken.
+
+The code below should **never** be used to hash a user's password.
+
+```
+<?php
+
+$hash = md5("the password");
+
+?>
+```
+
+I will note that the `sha1()` and `hash()` functions are slightly more secure (especially in combination) but still don't give as much protection against hackers as Phpass.
+
+Using Phpass
+------------
+
+It's actually very easy to start using Phpass, so go ahead and [download the framework at Openwall](http://www.openwall.com/phpass/). Extract and open the folder until you see the file `PasswordHash.php`. This is the only file that you will be needing so upload it to wherever your website files are stored.
+
+You must then include the file into wherever you will be working with passwords.
+
+```
+<?php
+
+require("PasswordHash.php");
+
+?>
+```
+
+Make sure that the path to `PasswordHash.php` is correct. If you receive no errors, then Phpass is ready to be used.
+
+Next you will want to construct the class with the proper arguments. The default arguments specified should be fine for up-to-date installations of PHP. The first argument specifies the "base-2 logarithm of the iteration count used for password stretching" and the second argument specifies the use of portable hashes.
+
+```
+<?php
+
+$hasher = new PasswordHash(8, false);
+
+?>
+```
+
+### Creating the Hash—Signup
+
+For something like a signup system, you will now want to create a hash of the password. In a typical situation, the password will be coming from a form that the user filled out.
+
+```
+<?php
+
+// In this case, the password is retrieved from a form input
+$password = $_POST["password"];
+
+// Passwords should never be longer than 72 characters to prevent DoS attacks
+if (strlen($password) > 72) { die("Password must be 72 characters or less"); }
+
+// The $hash variable will contain the hash of the password
+$hash = $hasher->HashPassword($password);
+
+if (strlen($hash) >= 20) {
+
+ // Store the hash somewhere such as a database
+ // The code for that is up to you as this tutorial only focuses on hashing passwords
+
+} else {
+
+ // something went wrong
+
+}
+
+?>
+```
+
+The `$hash` variable now contains the hash that you will need to store somewhere such as a database. Make sure to never actually store the raw password, only the hash that Phpass generates.
+
+Also take a note the following:
+
+-   The password limit should be set to 72 characters to prevent certain DoS attacks. We do this here with the `strlen()` function.
+-   The hash can never be less than 20 characters, so if it is then something went wrong during the encryption process. A simple if statement is done for this as well.
+
+### Checking "Matched" Passwords—Login
+
+For something like a login system, you will want to be able to check that the provided password matches up against your stored hash. Include the framework in if you haven't already.
+
+```
+<?php
+
+require("PasswordHash.php");
+
+$hasher = new PasswordHash(8, false);
+
+?>
+```
+
+There is no way to actually "decode" the hash (which is the point), instead we let Phpass do its magic for finding out if the password matches up against the stored hash.
+
+```
+<?php
+
+// Password from form input
+$password = $_POST["password"];
+
+// Passwords should never be longer than 72 characters to prevent DoS attacks
+if (strlen($password) > 72) { die("Password must be 72 characters or less"); }
+
+// Just in case the hash isn't found
+$stored_hash = "*";
+
+// Retrieve the hash that you stored earlier
+$stored_hash = "this is the hash we stored earlier";
+
+// Check that the password is correct, returns a boolean
+$check = $hasher->CheckPassword($password, $stored_hash);
+
+if ($check) {
+
+  // passwords matched! show account dashboard or something
+
+} else {
+
+ // passwords didn't match, show an error
+
+}
+
+?>
+```
+
+The `$check` variable will return true if the passwords matched. It's a good idea to then either display some sort of account dashboard for the user, or redirect them to their profile. If the check failed, you will need to send them back to the login form or output some sort of error message.
+
+Extra Resources
+---------------
+
+That is all it takes to start using Phpass, so pat yourself on the back for being a security-aware developer. Of course you should also make sure that your website is safe against other vulnerabilities such as SQL Injection, which can also be easily fixed by using prepared statements or the [database framework](http://sunnyis.me/blog/database-framework/) I wrote earlier.
+
+If you need a bit more help on getting started with Phpass, I recommend you check out this [starter project I made on GitHub](http://github.com/sunnysingh/phpass-starter). It basically follows all the steps in this post but is separated into files as well as including the Phpass framework. Also feel free to read the more lengthy [article about secure passwords on Openwall](http://www.openwall.com/articles/PHP-Users-Passwords "How to manage a PHP application's users and passwords").
+]]></description><guid isPermaLink="false">Secure Passwords with Phpass</guid><pubDate>Tue, 11 Oct 2011 16:55:00 GMT</pubDate></item><item><title><![CDATA[Database Framework]]></title><description><![CDATA[
+**Notice**: I wrote this article 3 years ago and thus may contain outdated information. While I can not guarantee updates on this framework, it does wrap around MySQLi and thus should still be secure.
+
+I published my first project on GitHub called [Database](http://github.com/sunnysingh/database) (super clever name, I know) which is a PHP framework for MySQL that makes interacting with databases easier. The purpose of this article is to introduce you to the MySQLi extension that it uses, and to explain why I built this framework.
+
+The Problem
+-----------
+
+For years I've been using the [MySQL database extension](http://www.php.net/manual/book.mysql.php "Documentation on the MySQL database extension") which you might typically know as the `mysql_*` functions in PHP. I never found a problem with it until recently when I realized that it is an outdated and insecure way to interact with MySQL databases. I am probably really late to realize that, but I still see a ton of people using these functions.
+
+For those of you that still use the MySQL extension functions such as `mysql_connect()`, don't be alarmed. It's fairly secure and gets the job done, and is probably the simplest way to use MySQL in PHP. However, these functions are extremely old now and don't support many of MySQL's latest features. Not only that but there are better options out there that will help secure your queries and prevent vulnerabilities such as SQL injection. If you're starting a new website, doing a redesign, or simply want to add something new to your skill set, please read on.
+
+MySQL Improved: Pros and Cons
+-----------------------------
+
+The "i" in MySQLi stands for improved (some say it can also stand for interface), so you can already guess that it's better. The main pros are speed, performance, security, and that it's written in an Objected Oriented Programming (OOP) style. It also has a procedural API with function aliases, but that's only to make old code easy to convert to the MySQLi extension.
+
+The only con it has is the amount of code needed to execute and fetch results from a single query. Here's a quick example of some code written using MySQLi:
+
+```
+<?php
+$db = new mysqli("host", "username", "password", "database");
+$stmt = $db->prepare("SELECT first_name, last_name FROM users WHERE id = ? AND username = ?")
+if ($stmt) {
+ $stmt->bind_param("is", $_GET["id"], $_GET["username"]);
+ $stmt->execute();
+ $stmt->bind_result($first_name, $last_name);
+ while ($stmt->fetch()) {
+  echo "First Name: ".$first_name; echo "Last Name: ".$last_name;
+ }
+ $stmt->close();
+}
+$db->close();
+?>
+```
+
+Here's a not so quick walk-through of this mess of code, line-by-line:
+
+1.  Sets up the database connection and creates the `$db` object that will contain all the methods we need.
+2.  Similar to `mysql_query()` except that we replace all variables with question marks (a.k.a. markers or placeholders). This is a feature of MySQLi that prevents SQL injection completely.
+3.  Makes sure there are no errors in the query.
+4.  Bind the parameters (variables) that will replace the markers in our query. The first argument specifies that we have an integer and a string, while the rest of the arguments are your variables. You don't need to escape them because MySQLi treats our query and parameters separately, making it fine to use values from `$_GET` or `$_POST`.
+5.  Execute the query we've "prepared."
+6.  Finally, retrieve the result and setup the variables we'd like to retrieve them as.
+7.  Loops through the result.
+8.  Here I'm just echo-ing out the data, but you can do whatever you want with it.
+9.  Close loop.
+10. Close the statement (if you don't, you'll get errors while executing multiple queries).
+
+As you can see, it's a very daunting task to execute a query and then fetch the results. I can definitely code this using the `mysql_*` functions and use less lines of code, but like I said before: you really want to take advantage of all the new features of MySQL and make your queries as secure as possible (unless you like getting hacked).
+
+But you may be thinking, if the `mysql_*` functions are so bad, then why did they make using MySQLi so hard? To be honest, I don't know. All I know is that there are many benefits to using MySQLi and I hope the framework I'm about to talk about will help aid more people to stop using those outdated functions.
+
+Introducing the Framework
+-------------------------
+
+Using MySQLi shouldn't be hard at all, and so that is why I've written this framework. It is more than a class wrapper: it cleans up the syntax needed to execute a query and adds methods specifically for fetching data. If you're itching to get started with it, you can [get the full source on GitHub](http://github.com/sunnysingh/database). I really recommend that you look at the docs, test it out for yourself, and let me know what you think. If you think it's stupid, fine don't use it but at least give me your constructive opinion. If you think it's the greatest thing since the Internet, then I'd love to know your opinions as well.
+
+### A Taste
+
+```
+<?php
+
+$db = new Database($name, $host, $username, $password);
+
+$name = $_GET["name"];
+$age = $_GET["age"];
+
+$insert = $db->query("INSERT INTO people (name, age) VALUES(?, ?)", array($name, $age));
+
+if ($insert !== false) {
+ $name = $db->fetch_field("SELECT name FROM people WHERE age = '123' LIMIT 1");
+ echo $name;
+}
+
+?>
+```
+
+There's a little taste of some of the code that makes use of a few great features of the database framework. What you should notice is how easy it is to setup a database connection, execute a secure insert statement, check if that insert was successful, and then retrieve some of the data we just inserted. This also looks nicer (and shorter) than the previous example, doesn't it?
+
+Feedback
+--------
+
+I hope some of you find this framework useful and I'd love to get some feedback on it. I built this out of personal need, but decided to open source it and give something back to the developer community. That's all for now though, thanks for wasting your time to read this.
+]]></description><guid isPermaLink="false">Database Framework</guid><pubDate>Wed, 24 Aug 2011 00:00:00 GMT</pubDate></item><item><title><![CDATA[Let Me Introduce Myself]]></title><description><![CDATA[
+Hey all, and welcome to my personal site and blog. The site itself is pretty self-explanatory: it's a place for people to go to whenever they want to know more about me and where they can easily find out how to contact me. It's also where I will be able to publish content, such as coding experiments and interesting posts on various topics. I plan to write mostly about web development, but since this is my *personal* site I might also do reviews, rants, and anything else I find worth talking about.
+
+Walk-through
+------------
+
+I put a decent amount of work into the site, and so I'd like to take a second and tell you all about the design and code that went into it.
+
+### Design
+
+The overall design is very simple, and in fact a bit too simple for my liking. I decided to go down this route because this will mostly be a content site, and so all I really needed to do was make the site visually appealing with focus set on the content itself. This is also the first time I tried to make typography look as pleasant and readable as possible. CSS' [@font-face](http://developer.mozilla.org/en/css/@font-face "Learn about using @font-face") is utilized for custom fonts with the help of [Google Web Fonts](http://www.google.com/webfonts); I'm currently using [Open Sans](http://www.google.com/webfonts/specimen/Open+Sans) for headings, and [Muli](http://www.google.com/webfonts/specimen/Muli) for regular text. I also bumped up the font size a bit so no one has to squint while reading my posts. If any typography purists are reading this, let me know if I'm doing anything wrong here.
+
+As far as the color scheme goes, I went with dark blue and shades of gray. I tend to use gray on almost all my projects as it's an easy way to add contrast, and I chose dark blue because it's my favorite color (I mean that in the most serious way possible).
+
+### Features
+
+There are quite a few features that I'd like to point out.
+
+#### Social Links
+
+It is really easy to find me across the Web as I have provided my profile links right below the header. I decided against using the oh-so-popular social icons because they are too much of a distraction, plus I think the links look pretty nice (and I always wanted to embed that neat [Twitter follow button](http://twitter.com/about/resources/followbutton) somewhere).
+
+#### Comments
+
+I decided to go with [DISQUS](http://disqus.com/) for the comments system. Main reason is because I love it when other blogs use it, as it makes commenting so much easier and faster. If you have a DISQUS account and are already logged in, then all you need to do is type your comment and hit "post". If you don't have an account, you can still as easily login with other accounts, e.g., Twitter, Yahoo!, Google. Not only that but I also enabled guest comments, so if you're used to the way WordPress handles comments then you should feel right at home.
+
+There are also a ton of other useful features such as email notifications, comment threading, mentions, and reactions. I particularly can't wait to see how the reactions feature works out, as it will bring conversations from across other sites like Twitter back to the comment thread.
+
+#### WordPress
+
+If you haven't figured it out already, the site runs completely on [WordPress](http://wordpress.org/). I have only used it to set up single blogs in the past, but not as a CMS. It is more than a blog script though, thus I decided to try it out for my personal site. I don't regret the decision at all, because the many new WordPress features that were recently introduced as well as the customizable nature of the system made it perfect for small sites like mine. Not only that but I knew that I wanted to have a blog section, and having a framework that already included blogging as a core feature made it a no-brainer.
+
+### Known Issues
+
+This can't be a legit post if I don't talk about good old Internet Explorer, right? I actually applied almost no fixes for that browser, and the site surprisingly looks decent. IE8 and IE9 are lookin' good, and IE7 is not perfect but it should manage. By default I prompt a [Google Chrome Frame](http://code.google.com/chrome/chromeframe/) overlay for IE6 users, as I have phased out that browser a long time ago.
+
+~~There also seems to be a bug with DISQUS and Google Web Fonts not playing nice with each other. When loading a post like this, you might notice that the fonts sort of do a "reload" when DISQUS finishes loading its stuff. I'm not sure of the exact cause, but if someone knows a solution please let me know.~~
+
+Font reloading seems to no longer be an issue after I upgraded to Firefox 6.
+
+### Other Stuff
+
+I've customized the hell out of WordPress, trying to make it more secure, faster, and work the way I want it to. Short URLs that would usually be shown as `http://sunnyis.me/?p=1` are now shown as `http://sunnyis.me/p1`. Not only does that look better, but saves a few characters as well. Then there's little stuff like how the share buttons load asynchronously, some custom DISQUS styles, a plugin that improves search, and so on. Like I said before: I'm a developer, and so simply installing WordPress with a pre-built theme would not satisfy me. This theme is built from scratch, and I read through a bunch of WordPress documentation on how to change the slightest things. Nothing's perfect of course, but I'm pretty happy with how things turned out so far.
+
+So that's it. This is my initial release and I hope to write more posts in the future (hopefully at least on a weekly basis or so) and release cool scripts, downloads, all that jazz. For now, feel free to let me know what you think so far and what I can make better.
+]]></description><guid isPermaLink="false">Let Me Introduce Myself</guid><pubDate>Fri, 12 Aug 2011 04:50:00 GMT</pubDate></item></channel></rss>
