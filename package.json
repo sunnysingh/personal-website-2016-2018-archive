@@ -37,7 +37,6 @@
     "metalsmith-define": "^1.0.0",
     "metalsmith-feed": "^0.2.0",
     "metalsmith-fingerprint": "^1.0.3",
-    "metalsmith-gzip": "^1.1.0",
     "metalsmith-html-minifier": "^1.1.0",
     "metalsmith-if": "^0.1.1",
     "metalsmith-ignore": "^0.1.2",

@@ -31,7 +31,6 @@ const fingerprint = require('metalsmith-fingerprint');
 const rename      = require('metalsmith-rename');
 const imagemin    = require('metalsmith-imagemin');
 const htmlMin     = require('metalsmith-html-minifier');
-const gzip        = require('metalsmith-gzip');
 const appendMeta  = require('./plugins/append-meta');
 const searchMeta  = require('./plugins/search-metadata');
 const sources     = require('./plugins/sources');
@@ -284,9 +283,6 @@ let build = callback => {
 
         // Minify HTML
         .use(condition(config.env == 'prod', htmlMin()))
-
-        // Gzip Compression
-        .use(condition(config.env == 'prod', gzip()))
 
         // Build
         .build(error => {
