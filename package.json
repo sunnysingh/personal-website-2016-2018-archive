@@ -28,7 +28,6 @@
     "babel-preset-es2015": "^6.3.13",
     "browser-sync": "^2.10.1",
     "cssnano": "^3.4.0",
-    "gh-pages": "^0.8.0",
     "handlebars": "^4.0.3",
     "lost": "^6.6.2",
     "metalsmith": "^2.1.0",
@@ -68,10 +67,9 @@
     "yargs": "^3.26.0"
   },
   "scripts": {
-    "serve":       "node build --watch",
-    "build":       "node build",
-    "deploy":      "node build && gh-pages -d build",
-    "deploy-only": "gh-pages -d build"
+    "serve": "node build --watch",
+    "build": "node build",
+    "deploy": "node build && surge --project ./build"
   },
   "repository": {
     "type": "git",
