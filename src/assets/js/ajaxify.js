@@ -39,9 +39,9 @@ domready(() => {
         let contentElement = bodyElement.querySelector('#content');
 
         // Only target appropriate relative links:
-        // Ignore URLs with protocols, mailto, or #
+        // Ignore URLs with protocols, mailto, #, or file extensions
         // Ignore <a>'s with target attribute (even _self, which allows for disabling ajaxify)
-        let linksSelector = 'a:not([href*="//"]):not([href^="mailto"]):not([href^="#"]):not([target])';
+        let linksSelector = 'a:not([href*="//"]):not([href^="mailto"]):not([href^="#"]):not([href$=".png"]):not([href$=".jpg"]):not([href$=".gif"]):not([target])';
 
         // Get current section
         let section = bodyElement.getAttribute('data-section');
@@ -181,10 +181,17 @@ domready(() => {
         window.addEventListener('popstate', function (event) {
             if (event.state === null) {
                 updatePage(initialPageData);
+
+                // Refresh click handlers
+                ajaxifyLinks(contentElement.querySelectorAll(linksSelector));
+
                 return;
             }
 
             updatePage(event.state);
+
+            // Refresh click handlers
+            ajaxifyLinks(contentElement.querySelectorAll(linksSelector));
         });
 
         // Initialize
