@@ -1,6 +1,6 @@
 ---
 topics: Coding
-title: Package Managers, and why they're awesome.
+title: Package Managers, and Why They're Awesome
 description: An explanation on package managers and how to setup a common one.
 date: 2015-06-02 19:54
 ---

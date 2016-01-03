@@ -1,6 +1,6 @@
 ---
 topics: General
-title: Redesign and other things
+title: Redesign and Other Things
 description: Announcing version 2 of the site's redesign.
 date: 2014-06-22 17:12
 ---

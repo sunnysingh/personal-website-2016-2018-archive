@@ -1,6 +1,6 @@
 ---
 topics: Technology
-title: Google I/O 2014 recap and thoughts
+title: "Google I/O 2014: Recap and Thoughts"
 description: Discussing Android L, Material Design, and Android Everywhere from this year's Google I/O.
 date: 2014-06-25 21:33
 image:
