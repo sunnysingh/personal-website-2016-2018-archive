@@ -20,12 +20,12 @@
 			</span>
 			<span
 				class="article-metadata-group has-tooltip has-tooltip-top"
-				aria-label="{{date this.date }}"
+				aria-label="{{fullDate this.date }}"
 			>
 				{{> icon name="time" }}
-				{{#if this.topics}}
+				{{#if this.date}}
 					<time datetime="{{ this.date }}">
-						{{timeago this.date }}
+						{{date this.date }}
 					</time>
 				{{else}}
 					No Date

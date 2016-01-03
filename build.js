@@ -105,11 +105,14 @@ Handlebars.registerHelper('ne', function (a, b) {
     return (a !== b) ? next.fn(this) : next.inverse(this);
 });
 
-Handlebars.registerHelper('timeago', (context, block) => {
-    return moment(context).fromNow();
+Handlebars.registerHelper('date', (context, block) => {
+    // Default: Jan 1, 2016
+    let format = block.hash.format || "MMM D, YYYY";
+    return moment(context).format(format);
 });
 
-Handlebars.registerHelper('date', (context, block) => {
+Handlebars.registerHelper('fullDate', (context, block) => {
+    // Default: January 1st, 2016 at 12:00PM
     let format = block.hash.format || "MMMM Do, YYYY [at] hh:mmA";
     return moment(context).format(format);
 });
