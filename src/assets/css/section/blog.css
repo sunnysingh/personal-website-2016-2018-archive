@@ -7,6 +7,8 @@
 |
 */
 
+@import 'emojione/assets/css/emojione.css';
+
 a.btn-subscribe {
 	border-color: #f26522;
 	color: #f26522;
