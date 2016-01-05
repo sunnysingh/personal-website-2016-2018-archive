@@ -34,6 +34,7 @@ const htmlMin     = require('metalsmith-html-minifier');
 const appendMeta  = require('./plugins/append-meta');
 const searchMeta  = require('./plugins/search-metadata');
 const sources     = require('./plugins/sources');
+const emoji       = require('./plugins/emoji');
 const Handlebars  = require('handlebars');
 const bs          = require('browser-sync').create();
 const notifier    = require('node-notifier');
@@ -265,6 +266,7 @@ let build = callback => {
         .use(branch('blog/**/*.md')
             .use(metallic())
             .use(markdown())
+            .use(emoji())
             .use(layouts({
                 engine:    'handlebars',
                 partials:  'partials',

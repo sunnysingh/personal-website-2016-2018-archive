@@ -27,7 +27,7 @@ I was part of a good number of projects last year, and here's the list:
 
 As I said, the new design is reminiscent of my old one. To make it feel more modern, I flattened the header and gave more spacing to content. Also, I didn't use a UI/front-end framework again because I wanted to demonstrate my skills and have some fun with flexbox. Since grids are still fairly complex, I did use [Lost](https://github.com/corysimmons/lost) which is grid framework built on PostCSS and has flexbox support.
 
-The logo was designed in [Sketch](https://www.sketchapp.com/) and the icons generated in [IcoMoon](https://icomoon.io/). Both are SVGs so bring on your 4K displays.
+The logo was designed in [Sketch](https://www.sketchapp.com/) and the icons generated in [IcoMoon](https://icomoon.io/). Both are SVGs so bring on your 4K displays :grin:.
 
 ### Static Site
 
