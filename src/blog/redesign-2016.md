@@ -39,7 +39,7 @@ There are some "gotchyas" when working with a static site, though. Dynamic stuff
 
 As far as hosting goes, I originally went with [GitHub Pages](https://pages.github.com/) but I ran into an issue with the way that GitHub routes static files. Since I generate a `blog.html` page, and my articles are within a blog folder, GitHub redirects to `/blog/` expecting an index file in there. Really annoying, but thankfully when I tried serving it on [Surge](https://surge.sh/) it worked perfectly. I also really like how much easier it is to push a project with them.
 
-## Compiling Assets
+### Compiling Assets
 
 A lot of new stuff for me here as well. [PostCSS](https://github.com/postcss/postcss) has been growing in popularity recently, and I think it will continue this year. I also happen to really like the modularity of it over pre-processors. There's a good feeling of going back to just writing regular CSS, since most PostCSS plugins just add custom properties or just extra functionality to current ones. Here's the ones I currently use:
 
