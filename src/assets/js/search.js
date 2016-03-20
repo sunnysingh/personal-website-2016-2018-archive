@@ -75,9 +75,16 @@ app.on('page:ready', () => {
 
 			let results = index.search(terms);
 
-			if (!results.length) {
+			if (!results.length && terms != '') {
 				resultsContainer.innerHTML = `
 					<div class="search-empty">No articles found for those search terms.</div>
+				`;
+				return;
+			}
+
+			if (!results.length && terms == '') {
+				resultsContainer.innerHTML = `
+					<div class="search-empty">Type a search term to find an article.</div>
 				`;
 				return;
 			}
@@ -119,28 +126,44 @@ app.on('page:ready', () => {
 
 	for (let form of forms) {
 
+		let input = form.querySelector('input');
+		let userIsTyping = false;
+		let typingTimer;
+
 		form.addEventListener('submit', event => {
-
-			let terms = form.querySelector('input').value;
-
 			event.preventDefault();
+		});
 
-			if (terms == '') {
-				return;
-			}
+		input.addEventListener('keydown', () => {
+			userIsTyping = true;
+		});
 
-			app.on('page:ready', page => {
-				if (page.section != 'search') return;
+		input.addEventListener('keyup', () => {
 
-				search(terms);
-			});
+			userIsTyping = false;
 
-			if (location.pathname == '/search') {
-				search(terms);
-				return;
-			}
-			
-			app.trigger('page:navigate', '/search');
+			if (typingTimer) clearTimeout(typingTimer);
+
+			typingTimer = setTimeout(() => {
+				if (userIsTyping) return;
+
+				let terms = input.value;
+
+				app.on('page:ready', page => {
+					if (page.section != 'search') return;
+
+					search(terms);
+				});
+
+				if (location.pathname == '/search') {
+					search(terms);
+					return;
+				}
+
+				if (terms != '') {
+					app.trigger('page:navigate', '/search');
+				}
+			}, 300);
 
 		});
 
