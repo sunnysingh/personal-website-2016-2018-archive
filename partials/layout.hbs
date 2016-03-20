@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" class="no-js">
 
 <head>
 
@@ -29,6 +29,9 @@
 	{{> favicons}}
 
 	{{> metadata}}
+
+	<!-- Replace .no-js class on html tag with .js -->
+	<script>(function(a){a.className=a.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
 
 	<style>{{{ sources.[assets/css/site.css] }}}</style>
 	<script src="/{{ fingerprint.[assets/js/site.js] }}" async></script>
@@ -76,7 +79,6 @@
 
 		<div class="search">
 			<form role="search" data-search>
-				<noscript>Sorry, you need to enable JavaScript to search this site.</noscript>
 				<input id="search" class="input" type="search" placeholder="Search articles..." />
 				<button class="hidden" type="submit">Search</button>
 			</form>
@@ -141,6 +143,7 @@
 					class="has-tooltip has-tooltip-top"
 					href="{{ url }}"
 					aria-label="{{ desc }}"
+					target="_self"
 				>
 					{{> icon name=item }}
 					<span class="sr-only">{{ label }}</span>
