@@ -98,6 +98,10 @@
         form {
             margin-right: 2rem;
             width: 50%;
+
+            .no-js & {
+                display: none !important;
+            }
         }
 
         input {
