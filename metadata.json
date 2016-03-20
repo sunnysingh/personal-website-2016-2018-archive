@@ -1,8 +1,8 @@
 {
     "me": {
-        "age": 22,
+        "age": 23,
         "location": "North Carolina",
-        "email" : "hello@sunnyis.me"
+        "email" : "me@sunnysingh.io"
     },
 
     "site": {
@@ -67,6 +67,12 @@
                     "label": "LinkedIn",
                     "desc": "View my professional work on LinkedIn",
                     "url": "https://www.linkedin.com/in/sunnyisme"
+                },
+                {
+                    "item": "pdf",
+                    "label": "Resumé",
+                    "desc": "View my resumé (pdf)",
+                    "url": "/resume.pdf"
                 },
                 {
                     "item": "codepen",
