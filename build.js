@@ -50,9 +50,11 @@ let config = {
     sourcemaps: argv.sourcemaps ? true : argv.watch,
 };
 
-// Uncomment when testing performance
-// config.env = 'prod';
-// config.sourcemaps = false;
+// For testing performance
+if (argv.perf) {
+    config.env = 'prod';
+    config.sourcemaps = false;
+}
 
 // Metadata is passed into templates and webpack
 
@@ -287,7 +289,9 @@ let build = callback => {
         .use(condition(config.env == 'prod', imagemin()))
 
         // Minify HTML
-        .use(condition(config.env == 'prod', htmlMin()))
+        .use(condition(config.env == 'prod', htmlMin('*.html', {
+            processScripts: ['application/ld+json'],
+        })))
 
         // Build
         .build(error => {
