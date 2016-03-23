@@ -1,6 +1,6 @@
 /build
 /node_modules
-.log
+*.log
 
 # OS generated files #
 ######################
