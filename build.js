@@ -122,9 +122,16 @@ Handlebars.registerHelper('fullDate', (context, block) => {
 
 // Metalsmith Pipeline
 
-let build = callback => {
+let build = (callback) => {
 
     Metalsmith(__dirname)
+
+        .clean(false)
+        .use(require('metalsmith-changed')({
+            forcePattern: [
+                'assets/**',
+            ]
+        }))
 
         // Metadata
         .metadata(metadata)
