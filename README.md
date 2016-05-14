@@ -1,4 +1,5 @@
 # [sunnysingh.io](https://sunnysingh.io/)
+[![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](http://stackshare.io/sunnysingh/personal-website)
 
 The source code for my personal website is hosted here. It is a static site generated with [Metalsmith](http://www.metalsmith.io/) and served on [Surge](https://surge.sh/).
 
