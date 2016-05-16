@@ -69,22 +69,10 @@
                     "url": "https://www.linkedin.com/in/sunnyisme"
                 },
                 {
-                    "item": "pdf",
-                    "label": "Resumé",
-                    "desc": "View my resumé (pdf)",
-                    "url": "/resume.pdf"
-                },
-                {
                     "item": "codepen",
                     "label": "CodePen",
                     "desc": "View my front-end demos on CodePen",
                     "url": "http://codepen.io/sunnysingh/"
-                },
-                {
-                    "item": "delicious",
-                    "label": "Delicious",
-                    "desc": "See what I'm sharing on Delicious",
-                    "url": "https://delicious.com/sunnyisme"
                 }
             ]
 
