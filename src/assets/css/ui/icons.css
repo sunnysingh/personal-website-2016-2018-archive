@@ -27,15 +27,24 @@
 	fill: #a81f80;
 }
 .fill-color5 {
-	fill: #e74c3b;
+	fill: #3d49ba;
 }
 .fill-color6 {
-	fill: #39f;
+	fill: #e74c3b;
 }
 .fill-color7 {
-	fill: #eee;
+	fill: #39f;
 }
 .fill-color8 {
+	fill: #eee;
+}
+.fill-color9 {
+	fill: #f5f5f5;
+}
+.fill-color10 {
+	fill: rgba(255, 255, 255, 0.1);
+}
+.fill-color11 {
 	fill: #fff;
 }
 

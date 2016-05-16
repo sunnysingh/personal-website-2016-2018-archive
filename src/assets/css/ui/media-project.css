@@ -20,6 +20,10 @@
             background: #f4f4f4;
         }
 
+        .is-devnews & {
+            background: #3e4aba;
+        }
+
         .is-phpass & {
             color: #fff;
             background: #8892be;
@@ -51,6 +55,10 @@
 
         .is-socialshares & h3 {
             color: #aa2582;
+        }
+
+        .is-devnews & h3 {
+            color: #3e4aba;
         }
 
         .is-phpass & h3 {
