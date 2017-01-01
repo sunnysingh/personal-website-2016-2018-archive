@@ -13,7 +13,7 @@
 
             "base_url": "https://sunnysingh.io",
 
-            "year": 2016,
+            "year": 2017,
 
             "sections": [
                 {
@@ -49,12 +49,6 @@
                     "label": "Twitter",
                     "desc": "Read my daily postings on Twitter",
                     "url": "https://twitter.com/sunnysinghio"
-                },
-                {
-                    "item": "codebee",
-                    "label": "CodeBee",
-                    "desc": "Explore my contributions on CodeBee",
-                    "url": "https://codebee.io/sunny"
                 },
                 {
                     "item": "github",
