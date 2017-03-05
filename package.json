@@ -18,6 +18,7 @@
     "mousetrap": "^1.5.3",
     "normalize.css": "^3.0.3",
     "nprogress": "^0.2.0",
+    "socialshares": "^2.0.4",
     "superagent": "^1.5.0",
     "sweetalert": "^1.1.3"
   },
