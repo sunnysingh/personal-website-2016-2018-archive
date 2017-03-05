@@ -67,7 +67,19 @@
                     "label": "CodePen",
                     "desc": "View my front-end demos on CodePen",
                     "url": "http://codepen.io/sunnysingh/"
-                }
+                },
+				{
+					"item": "instagram",
+					"label": "Instagram",
+					"desc": "See my life through a camera lens on Instagram",
+					"url": "https://www.instagram.com/sunnysinghio/"
+				},
+				{
+					"item": "soundcloud",
+					"label": "SoundCloud",
+					"desc": "Listen to my favorite sounds on SoundCloud",
+					"url": "https://soundcloud.com/sunnysinghmusic"
+				}
             ]
 
     },

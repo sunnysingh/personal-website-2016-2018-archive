@@ -1,60 +1,28 @@
 .icon {
-	display: inline-block;
-	width: 1em;
-	height: 1em;
-	fill: currentColor;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
 }
 
-/* =======================================================================================
-Example showing how to change the color/size of the icons:
+/* ==========================================
+Single-colored icons can be modified like so:
 .icon-name {
-	font-size: 32px; // works because "width" & "height" were set using em units
-	color: red; // works for single-colored icons, because "fill" was set to "currentColor"
+  font-size: 32px;
+  color: red;
 }
-======================================================================================== */
-.fill-color1 {
-	fill: #303131;
-}
-.fill-color2 {
-	fill: #333;
-}
-.fill-color3 {
-	fill: #0d2371;
-}
-.fill-color4 {
-	fill: #a81f80;
-}
-.fill-color5 {
-	fill: #3d49ba;
-}
-.fill-color6 {
-	fill: #e74c3b;
-}
-.fill-color7 {
-	fill: #39f;
-}
-.fill-color8 {
-	fill: #eee;
-}
-.fill-color9 {
-	fill: #f5f5f5;
-}
-.fill-color10 {
-	fill: rgba(255, 255, 255, 0.1);
-}
-.fill-color11 {
-	fill: #fff;
-}
-
+========================================== */
 
 .icon-tags {
-	width: 1.25em;
+  width: 1.25em;
 }
 
 .icon-comments {
-	width: 1.125em;
+  width: 1.125em;
 }
 
 .icon-codebee {
-	width: 0.8662109375em;
+  width: 0.8662109375em;
 }
