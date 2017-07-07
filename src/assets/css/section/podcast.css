@@ -1,0 +1,37 @@
+.podcast-text {
+	margin-bottom: 2rem;
+	text-align: center;
+}
+
+.podcast-links {
+	display: flex;
+	align-items: center;
+	margin-bottom: 2rem;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 0;
+	max-width: 750px;
+	list-style: none;
+	text-align: center;
+
+	& li {
+		margin: 0 2rem;
+		width: 33.333%;
+	}
+
+	@media (width <= 610px) {
+		& {
+			margin-bottom: 0;
+			flex-direction: column;
+		}
+
+		& li {
+			margin: 1rem 0;
+			width: 100%;
+		}
+
+		& a {
+			padding: 5px;
+		}
+	}
+}

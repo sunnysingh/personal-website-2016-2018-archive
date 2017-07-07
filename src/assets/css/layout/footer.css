@@ -9,7 +9,6 @@
 */
 
 .site-footer {
-    padding-top: 1rem;
     text-align: center;
 
     .social {
@@ -51,6 +50,10 @@
             font-size: 25px;
         }
     }
+
+	.section-podcast & .podcast {
+		display: none;
+	}
 
     .copyright {
         color: #b0b0b0;
