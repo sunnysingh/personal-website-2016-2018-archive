@@ -184,7 +184,8 @@ let build = (callback) => {
         .use(sources({
             pattern: [
                 'assets/css/site.css',
-                'assets/svg/logo.svg',
+				'assets/svg/logo.svg',
+				'assets/svg/podcast.svg',
             ]
         }))
 
