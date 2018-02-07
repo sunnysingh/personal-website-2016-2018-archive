@@ -56,8 +56,10 @@ a.btn-subscribe {
 }
 
 .article {
+	margin-bottom: 2rem;
 
 	&-image {
+		margin-bottom: 2rem;
 		text-align: center;
 	}
 

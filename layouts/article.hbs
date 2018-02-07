@@ -1,6 +1,6 @@
 {{#> layout }}
 
-	<article class="article">
+	<article class="article readable-container">
 
 		{{#if this.image}}
 			<figure class="article-image">
@@ -41,7 +41,7 @@
 
 	</article>
 
-	<div class="share">
+	<div class="share readable-container">
 
 		<div
 			class="socialshares"
@@ -58,7 +58,7 @@
 	</div>
 
 	<div
-		class="comments"
+		class="comments readable-container"
 		id="comments"
 		data-disqus-title="{{ this.title }}"
 		data-disqus-url="{{ site.base_url }}{{ this.url }}"
