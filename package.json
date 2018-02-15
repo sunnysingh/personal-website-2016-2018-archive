@@ -12,7 +12,7 @@
     "domready": "^1.0.8",
     "emojione": "^2.0.0",
     "get-form-data": "^1.2.4",
-    "lodash": "^3.10.1",
+    "lodash": "^4.17.5",
     "lunr": "^0.5.12",
     "moment": "^2.10.6",
     "mousetrap": "^1.5.3",
